@@ -1,56 +1,70 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+
+
+<style type="text/css">
+    
+    .dataEntryGrid
+    {
+        margin-top:0px;
+    }
+    
+    .dataEntryGrid th,
+    .dataEntryGrid td
+    {
+        border:solid 1px #CCC;
+        margin:0px;
+    }
+
+    .dataEntryGrid th
+    {
+        background-color:#DDD;
+        padding:0px;
+    }
+    
+    .dataEntryGrid td
+    {
+        background-color:#FFF;
+        padding:3px;
+    }
+</style>
 <h2>
     Data Entry App</h2>
-<div id="formContainer">
-    <table cellpadding="2" cellspacing="0" border="0">
+<div id="formContainer" style="background-color:#FFF;border:solid 1px gray;height:500px;overflow:auto">
+
+    
+    <table cellpadding="0" cellspacing="0" border="1" class="dataEntryGrid" width="100%"> 
         <thead>
-            <tr style="background-color: #CCC;">
-                
-                <th style="text-align: center">
+            <tr >
+                <th style="text-align: center;width: 100px;" >
                     First Name
                 </th>
-                <th style="text-align: center">
+                <th style="text-align: center;width: 100px;" >
                     Last Name
                 </th>
-                <th style="text-align: center">
+                <th style="text-align: center;width: 100px;" >
                     Age
                 </th>
+                <th>&nbsp;</th>
             </tr>
-           
-        </thead>
-         <tr style="background-color: #CCC;">
-                <td>
+            <tr style="background-color: #CCC;">
+                <th>
                     <input type="text" data-bind="value: Draft.FirstName" style="width: 85px;" />
-                </td>
-                <td>
+                </th>
+                <th>
                     <input type="text" data-bind="value: Draft.LastName" style="width: 85px;" />
-                </td>
-                <td>
+                </th>
+                <th>
                     <input type="text" data-bind="value: Draft.Age" style="width: 85px;" />
-                </td>
-                <td style="background-color: #FFF;">
+                </th>
+                <th style="background-color: #FFF;">
                     <a data-bind="click: SubmitDraft">Add</a>
-                </td>
+                </th>
             </tr>
-            <tr style="background-color: #EFE;">
-                <td>
-                    <span data-bind="text: Draft.FirstName" />
-                </td>
-                <td>
-                    <span data-bind="text: Draft.LastName" />
-                </td>
-                <td>
-                    <span data-bind="text: Draft.Age" />
-                </td>
-                <td>
-                    <br />
-                </td>
-            </tr>
+        </thead>
         <tbody data-bind="foreach: Records">
-            
-            <tr style="background-color: #FFF;">
+            <tr style="background-color: #EFE;">
                 <td>
                     <span data-bind="text: FirstName" />
                 </td>
@@ -58,7 +72,7 @@
                     <span data-bind="text: LastName" />
                 </td>
                 <td>
-                    <span data-bind="text: Id" />
+                    <span data-bind="text: Age" />
                 </td>
                 <td>
                     <span data-bind="text: Status" />
@@ -75,7 +89,6 @@
 <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/DataEntryBasic.js")" type="text/javascript"></script>
-
 <input id="Submit" type="button" value="Submit" />
 <div style="border: solid 1px #CCC; padding: 20px; margin-top: 10px; background-color: #EEE">
     <ul id="messages">

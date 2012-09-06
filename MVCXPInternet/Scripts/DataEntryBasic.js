@@ -9,21 +9,14 @@
 /// <reference path="linq.js" />
 /// <reference path="jquery.linq.js" />
 
-var app;
-
 $(document).ready(function () {
     
     $("#Submit").click(function () {
     });
     
-    var appSettings = {
-        AppContainerId: 'formContainer'
-    };
-
-    app = new DataEntryForm(appSettings);
-    app.Render();
-    ko.applyBindings(app);
-
+    var appSettings = {AppContainerId: 'formContainer'};
+    var app = new DataEntryForm(appSettings).Render();
+    
 });
 
 
@@ -57,18 +50,20 @@ function DataEntryForm(Settings) {
 
 
         $.connection.hub.start().done(function () { $('#messages').append('<li>' + 'Connected to server' + '</li>'); });
+
+        ko.applyBindings(self);
     }
 
 
     self.RecordProcessing = function (recordId, percentComplete) {
         //self.OutputConsole.append('<li>' + recordId + '( ' + percentComplete + ' complete. ) ' + '</li>');
-        var record = app.GetRecord(recordId);
+        var record = self.GetRecord(recordId);
         record.Status(percentComplete + '% complete');
     }
 
     self.RecordProcessingComplete = function (recordId, percentComplete) {
-        self.OutputConsole.append('<li>' + recordId + '( Completed! ) ' + '</li>');
-        var record = app.GetRecord(recordId);
+        //self.OutputConsole.append('<li>' + recordId + '( Completed! ) ' + '</li>');
+        var record = self.GetRecord(recordId);
         record.Status('Saved');
     }
 
@@ -83,7 +78,7 @@ function DataEntryForm(Settings) {
     }
 
     self.AddRecord = function () {
-        $('#messages').append('<li>' + 'Adding Record: ' + '</li>');
+        //$('#messages').append('<li>' + 'Adding Record: ' + '</li>');
     }
 
     self.SubmitDraft = function () {
@@ -95,7 +90,7 @@ function DataEntryForm(Settings) {
 
         self.Records.push(newRecord);
 
-        $('#messages').append('<li>' + 'Submitting...' + self.RecordCount() + '</li>');
+        //$('#messages').append('<li>' + 'Submitting...' + self.RecordCount() + '</li>');
         self.RecordProcessor.processRecord('record data', self.RecordCount());
 
     }
