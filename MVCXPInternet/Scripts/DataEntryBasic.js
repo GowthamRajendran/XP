@@ -12,28 +12,16 @@
 var app;
 
 $(document).ready(function () {
-
-
-
-
-
-
     
-
     $("#Submit").click(function () {
-
-        
     });
-
-
+    
     var appSettings = {
         AppContainerId: 'formContainer'
     };
 
-
     app = new DataEntryForm(appSettings);
     app.Render();
-    //app.Form = ko.mapping.fromJS(app.Form);
     ko.applyBindings(app);
 
 });
@@ -68,7 +56,7 @@ function DataEntryForm(Settings) {
         });
 
 
-        $.connection.hub.start().done(function () { $('#messages').append('<li>' + 'connected' + '</li>'); });
+        $.connection.hub.start().done(function () { $('#messages').append('<li>' + 'Connected to server' + '</li>'); });
     }
 
 
@@ -87,17 +75,11 @@ function DataEntryForm(Settings) {
     self.RecordProcessingFailed = function (recordId, percentComplete) {
         self.OutputConsole.append('<li>' + recordId + '( Failed ) ' + '</li>');
     }
-
-
+    
     self.GetRecord = function (id) {
-        var record;
-        //record = Enumerable.From(self.Records).Where("$.Id=" + id).Single();
-        //record = self.Records.where(function (item) { return item.Id == id; });
-        record = ko.utils.arrayFirst(self.Records(), function (record) {
-            return record.Id() === id;
+        return record = ko.utils.arrayFirst(self.Records(), function (record) {
+            return record.Id() == id;
         });
-        
-        return record;
     }
 
     self.AddRecord = function () {
@@ -106,17 +88,10 @@ function DataEntryForm(Settings) {
 
     self.SubmitDraft = function () {
 
-//        var newRecord = ko.mapping.toJS(self.Draft);
-//        self.RecordCount = self.RecordCount + 1;
-//        newRecord.Id = self.RecordCount;
-//        newRecord.Status = 'Saving';
-
-
         var newRecord = ko.mapping.fromJS(ko.toJS(self.Draft));
         self.RecordCount(self.RecordCount() + 1);
         newRecord.Id(self.RecordCount());
         newRecord.Status('Saving');
-
 
         self.Records.push(newRecord);
 
@@ -137,8 +112,6 @@ function RecordVM() {
     self.FirstName = 'fn';
     self.LastName = 'ln';
     self.Age = 0;
-
-
 
     self.Status = ko.observable('Draft'); //['Draft', 'Working', 'Dirty', 'Saving', 'Saved', 'Failed', 'ToBeDeleted']
 

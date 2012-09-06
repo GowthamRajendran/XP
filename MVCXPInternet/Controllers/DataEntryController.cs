@@ -8,7 +8,7 @@ namespace MVCXPInternet.Controllers
 {
     public class DataEntryController : Controller
     {
-        public ActionResult Index()
+        public ActionResult DataEntry()
         {
             ViewBag.Message = "Uses Knockout and SignalR";
 

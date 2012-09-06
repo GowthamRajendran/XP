@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>
+    Data Entry App</h2>
+<div id="formContainer">
+    <table cellpadding="2" cellspacing="0" border="0">
+        <thead>
+            <tr style="background-color: #CCC;">
+                
+                <th style="text-align: center">
+                    First Name
+                </th>
+                <th style="text-align: center">
+                    Last Name
+                </th>
+                <th style="text-align: center">
+                    Age
+                </th>
+            </tr>
+           
+        </thead>
+         <tr style="background-color: #CCC;">
+                <td>
+                    <input type="text" data-bind="value: Draft.FirstName" style="width: 85px;" />
+                </td>
+                <td>
+                    <input type="text" data-bind="value: Draft.LastName" style="width: 85px;" />
+                </td>
+                <td>
+                    <input type="text" data-bind="value: Draft.Age" style="width: 85px;" />
+                </td>
+                <td style="background-color: #FFF;">
+                    <a data-bind="click: SubmitDraft">Add</a>
+                </td>
+            </tr>
+            <tr style="background-color: #EFE;">
+                <td>
+                    <span data-bind="text: Draft.FirstName" />
+                </td>
+                <td>
+                    <span data-bind="text: Draft.LastName" />
+                </td>
+                <td>
+                    <span data-bind="text: Draft.Age" />
+                </td>
+                <td>
+                    <br />
+                </td>
+            </tr>
+        <tbody data-bind="foreach: Records">
+            
+            <tr style="background-color: #FFF;">
+                <td>
+                    <span data-bind="text: FirstName" />
+                </td>
+                <td>
+                    <span data-bind="text: LastName" />
+                </td>
+                <td>
+                    <span data-bind="text: Id" />
+                </td>
+                <td>
+                    <span data-bind="text: Status" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.signalR-0.5.3.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/DataEntryBasic.js")" type="text/javascript"></script>
+
+<input id="Submit" type="button" value="Submit" />
+<div style="border: solid 1px #CCC; padding: 20px; margin-top: 10px; background-color: #EEE">
+    <ul id="messages">
+    </ul>
+</div>
