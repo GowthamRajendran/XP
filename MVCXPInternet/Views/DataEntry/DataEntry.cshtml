@@ -1,65 +1,105 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
-
 <style type="text/css">
-    
     .dataEntryGrid
     {
-        margin-top:0px;
+        margin-top: 0px;
     }
     
-    .dataEntryGrid th,
-    .dataEntryGrid td
+    .dataEntryGrid th, .dataEntryGrid td
     {
-        border:solid 1px #CCC;
-        margin:0px;
+        border: solid 1px #CCC;
+        margin: 0px;
     }
-
+    
     .dataEntryGrid th
     {
-        background-color:#DDD;
-        padding:0px;
+        background-color: #DDD;
+        padding: 0px;
     }
     
     .dataEntryGrid td
     {
-        background-color:#FFF;
-        padding:3px;
+        background-color: #FFF;
+        padding: 3px;
+    }
+    
+    .dataFieldInfoContainer
+    {
+        border: solid 1px gray;
+        margin: 0px;
+        padding: 13px;
+        background-color: #EEE;
+    }
+    
+    
+    .optionscontainer
+    {
+    }
+    
+    .optionscontainer .option
+    {
+        border: solid 1px #5873a7;
+        background-color: #cfdefc;
+        padding: 3px;
+        margin: 3px;
+        float: left;
+        width: 450px;
+    }
+    
+    .optionscontainer .option.selected
+    {
+        border: solid 1px #224992;
+        background-color: #4268af;
+        color: #FFF;
+    }
+    
+    .optionscontainer .option table
+    {
+        margin: 0px;
+    }
+    
+    .optionscontainer .option .optionKey
+    {
+        width: 15px;
+        font-weight: bold;
+        font-size:1.3em;
+        vertical-align: top;
+        padding: 5px;
+    }
+    .optionscontainer .option .optionLabel
+    {
+        padding: 0px;
     }
 </style>
 <h2>
     Data Entry App</h2>
-<div id="formContainer" style="background-color:#FFF;border:solid 1px gray;height:500px;overflow:auto">
-
-    
-    <table cellpadding="0" cellspacing="0" border="1" class="dataEntryGrid" width="100%"> 
+<div id="errors" style="color: Maroon; border: solid 1px #FAA; background-color: #FEE;
+    padding: 10px; margin-top: 10px; display: none;">
+</div>
+<div style="text-align: right">
+    <h4>
+        Processed : <span data-bind="text: ProcessedRecords().length"></span>&nbsp;/&nbsp;<span
+            data-bind="text: Records().length"></span>&nbsp;Pending : <span data-bind="text: PendingRecords().length">
+            </span>&nbsp;/&nbsp;<span data-bind="text: Records().length"></span></h4>
+</div>
+<div id="formContainer" style="background-color: #FFF; border: solid 1px gray; height: 500px;
+    overflow: auto">
+    <table cellpadding="0" cellspacing="0" border="1" class="dataEntryGrid" width="100%">
         <thead>
-            <tr >
-                <th style="text-align: center;width: 100px;" >
+            <tr>
+                <th style="text-align: center; width: 100px;">
                     First Name
                 </th>
-                <th style="text-align: center;width: 100px;" >
+                <th style="text-align: center; width: 100px;">
                     Last Name
                 </th>
-                <th style="text-align: center;width: 100px;" >
+                <th style="text-align: center; width: 100px;">
                     Age
                 </th>
-                <th>&nbsp;</th>
-            </tr>
-            <tr style="background-color: #CCC;">
                 <th>
-                    <input type="text" data-bind="value: Draft.FirstName" style="width: 85px;" />
-                </th>
-                <th>
-                    <input type="text" data-bind="value: Draft.LastName" style="width: 85px;" />
-                </th>
-                <th>
-                    <input type="text" data-bind="value: Draft.Age" style="width: 85px;" />
-                </th>
-                <th style="background-color: #FFF;">
-                    <a data-bind="click: SubmitDraft">Add</a>
+                    &nbsp;
                 </th>
             </tr>
         </thead>
@@ -81,6 +121,63 @@
         </tbody>
     </table>
 </div>
+Count : <span data-bind="text: Draft.Age"></span> <br />
+Selected Value : <span id="selectedValue" data-bind="text: Draft.SelectedValue"></span>
+<div class="dataFieldInfoContainer" style="">
+
+    <div class="optionscontainer">
+        
+        <!-- ko foreach: Draft.Options -->
+        <div class="option" data-bind="css: { selected: Selected }"  >
+            <table width="100%" border="1" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td class="optionKey" >
+                        <span data-bind="text: Key"></span>
+                    </td>
+                    <td class="optionLabel">
+                        <span data-bind="text: Label"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- /ko -->
+        <br style="clear: both;" />
+    </div>
+</div>
+<div>
+    <table cellpadding="0" cellspacing="0" border="1" class="dataEntryGrid" width="100%">
+        <thead>
+            <tr>
+                <th style="text-align: center; width: 100px;">
+                    First Name
+                </th>
+                <th style="text-align: center; width: 100px;">
+                    Last Name
+                </th>
+                <th style="text-align: center; width: 100px;">
+                    Age
+                </th>
+                <th>
+                    &nbsp;
+                </th>
+            </tr>
+            <tr style="background-color: #CCC;">
+                <th>
+                    <input type="text" data-bind="value: Draft.FirstName" style="width: 85px;" />
+                </th>
+                <th>
+                    <input type="text" data-bind="value: Draft.LastName" style="width: 85px;" />
+                </th>
+                <th>
+                    <input type="text" data-bind="value: Draft.Age, valueUpdate: 'keyup'" style="width: 85px;" />
+                </th>
+                <th style="background-color: #FFF;">
+                    <a data-bind="click: SubmitDraft">Add</a>
+                </th>
+            </tr>
+        </thead>
+    </table>
+</div>
 <script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.signalR-0.5.3.min.js")" type="text/javascript"></script>
@@ -89,6 +186,27 @@
 <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/DataEntryBasic.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var add = true;
+        $("#Submit").click(function () {
+            if (add) {
+                $(".optionscontainer .option").addClass('selected');
+                add = false;
+            } else {
+                $(".optionscontainer .option").removeClass('selected');
+                add = true;
+            }
+        });
+
+
+        $(".option").click(function () {
+            //$("#selectedValue").val($(this).find('.optionKey').text().trim());
+
+        });
+    });
+</script>
 <input id="Submit" type="button" value="Submit" />
 <div style="border: solid 1px #CCC; padding: 20px; margin-top: 10px; background-color: #EEE">
     <ul id="messages">

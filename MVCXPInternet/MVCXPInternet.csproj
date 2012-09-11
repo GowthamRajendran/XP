@@ -175,11 +175,13 @@
     <Compile Include="Controllers\DataEntryHub.cs" />
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Scripts\DAL\DataEntryInitializer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Scripts\DAL\DataEntryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
