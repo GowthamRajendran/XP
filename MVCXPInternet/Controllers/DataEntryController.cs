@@ -15,5 +15,12 @@ namespace MVCXPInternet.Controllers
             return View();
         }
 
+        public ActionResult DataEntryBasic()
+        {
+            ViewBag.Message = "Uses Knockout and SignalR";
+
+            return View();
+        }
+
     }
 }
