@@ -32,8 +32,8 @@ $(document).ready(function () {
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { Label: 'Yes', Value: 'Y' }, 
-                    { Label: 'No', Value: 'N'}
+                    { Label: 'Yes', Value: 'Y', AccessKeys: ['0'] },
+                    { Label: 'No', Value: 'N', AccessKeys: ['1'] }
                 ] 
             },
             { 
@@ -48,32 +48,29 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 4, 
                 Id: 3, 
-                Required: false, 
                 Label: 'Shift', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { Label: 'AM', Value: 'AM' }, 
-                    { Label: 'PM', Value: 'PM'}
+                    { Label: 'AM', Value: 'AM', AccessKeys: ['0'] },
+                    { Label: 'PM', Value: 'PM', AccessKeys: ['1'] }
                 ] 
             },
             { 
                 DisplayOrder: 5, 
                 Id: 4, 
-                Required: false, 
                 Label: 'Sub-G ETT', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { Label: 'Yes', Value: 'Y' }, 
-                    { Label: 'No', Value: 'N' }, 
-                    { Label: 'Contraindicated', Value: 'C'}
+                    { Label: 'Yes', Value: 'Y', AccessKeys: ['0'] },
+                    { Label: 'No', Value: 'N', AccessKeys: ['1'] },
+                    { Label: 'Contraindicated', Value: 'C', AccessKeys: ['2'] }
                 ] 
             },
             { 
                 DisplayOrder: 6, 
                 Id: 5, 
-                Required: false, 
                 Label: 'Sub-G ETT Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -85,7 +82,6 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 7, 
                 Id: 6, 
-                Required: false, 
                 Label: 'Location of Intubation', 
                 Type: 'number', Interface: 'dropdown', 
                 Options: [
@@ -103,33 +99,30 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 8, 
                 Id: 7, 
-                Required: false, 
                 Label: 'Does Sub-G tube work?', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes' },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No' },
-                    { DisplayOrder: '3', Value: 'N/A', Label: 'Not Applicable' }
+                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { DisplayOrder: '3', Value: 'N/A', Label: 'Not Applicable', AccessKeys: ['na','/','2'] } //Test Case
                 ] 
             },
             { 
                 DisplayOrder: 9, 
                 Id: 8, 
-                Required: false, 
                 Label: 'HOB @ ≥30o', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes' },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No' },
-                    { DisplayOrder: '3', Value: 'C', Label: 'Contraindicated' }
+                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { DisplayOrder: '3', Value: 'C', Label: 'Contraindicated', AccessKeys: ['2'] }
                 ] 
             },
             { 
                 DisplayOrder: 10, 
                 Id: 9, 
-                Required: false, 
                 Label: 'HOB Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -149,7 +142,6 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 11, 
                 Id: 10, 
-                Required: false, 
                 Label: 'Oral Care', 
                 Type: 'number', 
                 Interface: 'textbox', 
@@ -158,7 +150,6 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 12, 
                 Id: 11, 
-                Required: false, 
                 Label: 'Oral Care Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -170,7 +161,6 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 13, 
                 Id: 12, 
-                Required: false, 
                 Label: 'Oral Care with CHG', 
                 Type: 'number', 
                 Interface: 'textbox', 
@@ -179,7 +169,6 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 14, 
                 Id: 13, 
-                Required: false, 
                 Label: 'CHG Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -195,20 +184,18 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 15, 
                 Id: 14, 
-                Required: false, 
                 Label: 'SAT', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes' },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No' },
-                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated' }
+                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2'] } //Test Case
                 ] 
             },
             { 
                 DisplayOrder: 16, 
                 Id: 15, 
-                Required: false, 
                 Label: 'SAT Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -224,20 +211,18 @@ $(document).ready(function () {
             { 
                 DisplayOrder: 17, 
                 Id: 16, 
-                Required: false, 
                 Label: 'SBT', 
                 Type: 'string', 
                 Interface: 'dropdown', 
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes' },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No' },
-                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated' }
+                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
                 ] 
             },
             { 
                 DisplayOrder: 18,
                 Id: 17, 
-                Required: false, 
                 Label: 'SBT Con', 
                 Type: 'number', 
                 Interface: 'dropdown', 
@@ -492,18 +477,18 @@ function FieldVM(label) {
     self.Options = [];
 
 
-    self.Value = ko.observable('');
+    //self.Value = ko.observable('');
 
-//    self.Input = '';
-
-//    self.Value = ko.computed({
-//        read: function () {
-//            return self.Input.toLowerCase();
-//        },
-//        write: function (value) {
-//            self.Input = value; 
-//        }
-//    });
+    self.Input = ko.observable('');
+    self.Value = ko.computed({
+        read: function () {
+            return this.Input().toUpperCase();
+        },
+        write: function (value) {
+            this.Input(value); 
+        },
+        owner : self
+    });
 
     self.Value.subscribe(function (newValue) {
 

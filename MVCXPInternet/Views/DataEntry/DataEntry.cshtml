@@ -157,11 +157,11 @@
 <div class="dataFieldInfoContainer">
     <div class="optionscontainer">
         <!-- ko foreach: Draft.Fields -->
-        <div id="currentFieldPreview" data-bind="attr: { class: Label, FieldId: Id}, visible: HasFocus">
+        <div id="currentFieldPreview" data-bind="visible: HasFocus">
             <span data-bind="text: Label"></span>: <span data-bind="text: Value">
             </span>
         </div>
-        <div class="fieldOptions" data-bind="attr: { class: Label, FieldId: Id}, visible: HasFocus">
+        <div class="fieldOptions" data-bind="visible: HasFocus">
             <!-- ko foreach: Options -->
             <div class="option" data-bind="css: { selected: Selected }">
                 <table width="100%" border="1" cellpadding="0" cellspacing="0">
