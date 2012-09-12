@@ -14,6 +14,8 @@ namespace MVCXPInternet.Controllers
         private DataEntryContext db;
         public void InitiateBatch()
         {
+            //if (!this.Context.User.Identity.IsAuthenticated) Caller.ErrorOccured("Unauthorized operation");
+
             try
             {
                 this.db = new DataEntryContext();
@@ -24,20 +26,24 @@ namespace MVCXPInternet.Controllers
                 Caller.ErrorOccured(string.Format("{0}", e.Message));
             }
 
+
+
         }
 
-        public string ProcessRecord(Record record, int recordId)
+        public string ProcessRecord(int recordId)
         {
+            //if (!this.Context.User.Identity.IsAuthenticated) Caller.ErrorOccured("Unauthorized operation");
+
             try
             {
                 Caller.RecordProcessing(recordId, 0);
-                System.Threading.Thread.Sleep(300);
+                System.Threading.Thread.Sleep(1000);
                 Caller.RecordProcessing(recordId, 25);
-                System.Threading.Thread.Sleep(300);
+                System.Threading.Thread.Sleep(500);
                 Caller.RecordProcessing(recordId, 50);
                 System.Threading.Thread.Sleep(300);
                 Caller.RecordProcessing(recordId, 75);
-                System.Threading.Thread.Sleep(300);
+                System.Threading.Thread.Sleep(1000);
                 Caller.RecordProcessing(recordId, 100);
                 Caller.RecordProcessingComplete(recordId);
 
@@ -54,12 +60,12 @@ namespace MVCXPInternet.Controllers
             return "Processed Successfully";
 
             //System.Threading.Thread.Sleep(3000);
-            
+
         }
 
         public void Dispose()
         {
-            db.Dispose(); 
+            db.Dispose();
         }
 
         public System.Threading.Tasks.Task Disconnect()

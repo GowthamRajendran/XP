@@ -84,11 +84,11 @@
     
     #currentFieldPreview
     {
-        font-size:1.5em;
-        font-weight:bold;
+        font-size: 1.5em;
+        font-weight: bold;
         border: solid 1px #CCC;
         background-color: #FFF;
-        padding:5px;
+        padding: 5px;
     }
     #editor
     {
@@ -97,7 +97,7 @@
     }
     
     
-    #error
+    #errors
     {
         color: Maroon;
         border: solid 1px #FAA;
@@ -156,25 +156,30 @@
 </div>
 <div class="dataFieldInfoContainer">
     <div class="optionscontainer">
-        <!-- ko foreach: Draft.CurrentField.Options -->
-        <div class="option" data-bind="css: { selected: Selected }">
-            <table width="100%" border="1" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td class="optionKey">
-                        <span data-bind="text: Value"></span>
-                    </td>
-                    <td class="optionLabel">
-                        <span data-bind="text: Label"></span>
-                    </td>
-                </tr>
-            </table>
+        <!-- ko foreach: Draft.Fields -->
+        <div id="currentFieldPreview" data-bind="attr: { class: Label, FieldId: Id}, visible: HasFocus">
+            <span data-bind="text: Label"></span>: <span data-bind="text: Value">
+            </span>
+        </div>
+        <div class="fieldOptions" data-bind="attr: { class: Label, FieldId: Id}, visible: HasFocus">
+            <!-- ko foreach: Options -->
+            <div class="option" data-bind="css: { selected: Selected }">
+                <table width="100%" border="1" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="optionKey">
+                            <span data-bind="text: Value"></span>
+                        </td>
+                        <td class="optionLabel">
+                            <span data-bind="text: Label"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <!-- /ko -->
+            <br style="clear: both;" />
         </div>
         <!-- /ko -->
-        <br style="clear: both;" />
     </div>
-</div>
-<div id="currentFieldPreview" >
-    <span data-bind="text: Draft.CurrentField.Label" ></span> : <span data-bind="text: Draft.CurrentField.Value" ></span>
 </div>
 <div class="editor">
     <table cellpadding="0" cellspacing="0" border="1" width="100%">
@@ -190,7 +195,7 @@
         <tr>
             <!-- ko foreach: Draft.Fields -->
             <td style="text-align: left; padding: 0px; width: 55px;">
-                <input type="text" data-bind="value: Value, valueUpdate: 'keyup', event: { focus: function(){}}"
+                <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus"
                     style="width: 40px; margin: 0px; padding: 5px 2px" />
             </td>
             <!-- /ko -->
