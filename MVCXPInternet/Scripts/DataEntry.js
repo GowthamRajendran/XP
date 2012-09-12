@@ -15,75 +15,75 @@ $(document).ready(function () {
 
     var recordTemplateAsJson = {
         Fields: [
-            { 
-                DisplayOrder: 1, 
-                Id: 0, 
-                Required: true, 
-                Label: 'Bed #', 
-                Type: 'number', 
-                Interface: 'textbox', 
-                Options: [] 
+            {
+                DisplayOrder: 1,
+                Id: 0,
+                Required: true,
+                Label: 'Bed #',
+                Type: 'number',
+                Interface: 'textbox',
+                Options: []
             },
-            { 
-                DisplayOrder: 2, 
-                Id: 1, 
-                Required: true, 
-                Label: 'Intub / Trach & Mech Vent', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 2,
+                Id: 1,
+                Required: true,
+                Label: 'Intub / Trach & Mech Vent',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { Label: 'Yes', Value: 'Y', AccessKeys: ['0'] },
                     { Label: 'No', Value: 'N', AccessKeys: ['1'] }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 3, 
-                Id: 2, 
-                Required: true, 
-                Label: 'Date of intubation (mm/dd/yyyy)', 
-                Type: 'date', 
-                Interface: 'datepicker', 
-                Options: [] 
+            {
+                DisplayOrder: 3,
+                Id: 2,
+                Required: true,
+                Label: 'Date of intubation (mm/dd/yyyy)',
+                Type: 'date',
+                Interface: 'datepicker',
+                Options: []
             },
-            { 
-                DisplayOrder: 4, 
-                Id: 3, 
-                Label: 'Shift', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 4,
+                Id: 3,
+                Label: 'Shift',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { Label: 'AM', Value: 'AM', AccessKeys: ['0'] },
                     { Label: 'PM', Value: 'PM', AccessKeys: ['1'] }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 5, 
-                Id: 4, 
-                Label: 'Sub-G ETT', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 5,
+                Id: 4,
+                Label: 'Sub-G ETT',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { Label: 'Yes', Value: 'Y', AccessKeys: ['0'] },
                     { Label: 'No', Value: 'N', AccessKeys: ['1'] },
                     { Label: 'Contraindicated', Value: 'C', AccessKeys: ['2'] }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 6, 
-                Id: 5, 
-                Label: 'Sub-G ETT Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 6,
+                Id: 5,
+                Label: 'Sub-G ETT Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Tracheostomy' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 7, 
-                Id: 6, 
-                Label: 'Location of Intubation', 
-                Type: 'number', Interface: 'dropdown', 
+            {
+                DisplayOrder: 7,
+                Id: 6,
+                Label: 'Location of Intubation',
+                Type: 'number', Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Your ICU' },
                     { DisplayOrder: '2', Value: '1', Label: 'Another ICU in your hospital' },
@@ -94,38 +94,38 @@ $(document).ready(function () {
                     { DisplayOrder: '7', Value: '6', Label: 'Cardiovascular and Interventional Laboratory (CVDL)' },
                     { DisplayOrder: '8', Value: '7', Label: 'During a code on the floor' },
                     { DisplayOrder: '9', Value: '8', Label: 'Another location not listed above' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 8, 
-                Id: 7, 
-                Label: 'Does Sub-G tube work?', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 8,
+                Id: 7,
+                Label: 'Does Sub-G tube work?',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
                     { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'N/A', Label: 'Not Applicable', AccessKeys: ['na','/','2'] } //Test Case
-                ] 
+                    { DisplayOrder: '3', Value: 'N/A', Label: 'Not Applicable', AccessKeys: ['na', '/', '2']} //Test Case
+                ]
             },
-            { 
-                DisplayOrder: 9, 
-                Id: 8, 
-                Label: 'HOB @ ≥30o', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 9,
+                Id: 8,
+                Label: 'HOB @ ≥30o',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
                     { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
                     { DisplayOrder: '3', Value: 'C', Label: 'Contraindicated', AccessKeys: ['2'] }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 10, 
-                Id: 9, 
-                Label: 'HOB Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 10,
+                Id: 9,
+                Label: 'HOB Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Hypotension' },
@@ -137,41 +137,41 @@ $(document).ready(function () {
                     { DisplayOrder: '8', Value: '7', Label: 'Intra aortic balloon pump' },
                     { DisplayOrder: '9', Value: '8', Label: 'Open abdomen' },
                     { DisplayOrder: '10', Value: '9', Label: 'Patient refusal' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 11, 
-                Id: 10, 
-                Label: 'Oral Care', 
-                Type: 'number', 
-                Interface: 'textbox', 
-                Options: [] 
+            {
+                DisplayOrder: 11,
+                Id: 10,
+                Label: 'Oral Care',
+                Type: 'number',
+                Interface: 'textbox',
+                Options: []
             },
-            { 
-                DisplayOrder: 12, 
-                Id: 11, 
-                Label: 'Oral Care Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 12,
+                Id: 11,
+                Label: 'Oral Care Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Patient refusal' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 13, 
-                Id: 12, 
-                Label: 'Oral Care with CHG', 
-                Type: 'number', 
-                Interface: 'textbox', 
-                Options: []  
+            {
+                DisplayOrder: 13,
+                Id: 12,
+                Label: 'Oral Care with CHG',
+                Type: 'number',
+                Interface: 'textbox',
+                Options: []
             },
-            { 
-                DisplayOrder: 14, 
-                Id: 13, 
-                Label: 'CHG Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 14,
+                Id: 13,
+                Label: 'CHG Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Patient is known to have an allergic or hypersensitivity reaction to chlorhexidine' },
@@ -179,26 +179,26 @@ $(document).ready(function () {
                     { DisplayOrder: '4', Value: '3', Label: 'There is a possibility of direct contact of CHG with meninges' },
                     { DisplayOrder: '5', Value: '4', Label: 'ALL oral care is contraindicated.  (In this case, the answer in the Oral Care column for this patient should also be “C”.)' },
                     { DisplayOrder: '6', Value: '5', Label: 'Patient refusal' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 15, 
-                Id: 14, 
-                Label: 'SAT', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 15,
+                Id: 14,
+                Label: 'SAT',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
                     { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2'] } //Test Case
-                ] 
+                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
+                ]
             },
-            { 
-                DisplayOrder: 16, 
-                Id: 15, 
-                Label: 'SAT Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 16,
+                Id: 15,
+                Label: 'SAT Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Patient is receiving a sedative infusion for active seizures or alcohol withdrawal.' },
@@ -206,26 +206,26 @@ $(document).ready(function () {
                     { DisplayOrder: '4', Value: '3', Label: 'Patient is receiving neuromuscular blockers.' },
                     { DisplayOrder: '5', Value: '4', Label: 'Patient has had evidence of active myocardial ischemia in the previous 24 hrs.' },
                     { DisplayOrder: '6', Value: '5', Label: 'Patient has had evidence of increased intracranial pressure.' }
-                ] 
+                ]
             },
-            { 
-                DisplayOrder: 17, 
-                Id: 16, 
-                Label: 'SBT', 
-                Type: 'string', 
-                Interface: 'dropdown', 
+            {
+                DisplayOrder: 17,
+                Id: 16,
+                Label: 'SBT',
+                Type: 'string',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
                     { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
                     { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
-                ] 
+                ]
             },
-            { 
+            {
                 DisplayOrder: 18,
-                Id: 17, 
-                Label: 'SBT Con', 
-                Type: 'number', 
-                Interface: 'dropdown', 
+                Id: 17,
+                Label: 'SBT Con',
+                Type: 'number',
+                Interface: 'dropdown',
                 Options: [
                     { DisplayOrder: '1', Value: '0', Label: 'Other' },
                     { DisplayOrder: '2', Value: '1', Label: 'Doesn’t have adequate oxygenation [SpO2 < 88% on an F1O2 of <= 50%and a PEEP of <=3 cm H2O' },
@@ -233,13 +233,13 @@ $(document).ready(function () {
                     { DisplayOrder: '4', Value: '3', Label: 'Acute agitation requiring escalating sedative doses.' },
                     { DisplayOrder: '5', Value: '4', Label: 'Significant use of vasopressors or inotropes.' },
                     { DisplayOrder: '6', Value: '5', Label: 'Evidence of increased intracranial pressure.' }
-                ] 
+                ]
             }
         ]
     }
 
     var recordTemplate = new RecordTemplate(recordTemplateAsJson);
-   
+
     var options = {
         AppContainerId: 'formContainer',
         ErrorConsoleId: 'errors',
@@ -389,9 +389,9 @@ function DataEntryForm(recordTemplate, options) {
 
 
         //RESET DRAFT
-//        ko.utils.arrayForEach(self.Draft.Fields(), function (field) {
-//            field.Value('');
-//        });
+        //        ko.utils.arrayForEach(self.Draft.Fields(), function (field) {
+        //            field.Value('');
+        //        });
 
         //PROCESS RECORD : TODO : Send  and accept the record data in right format
         self.RecordProcessor.processRecord(self.RecordCount())
@@ -452,18 +452,18 @@ function RecordVM(recordTemplate, record) {
 
     //TODO :Consider using extensions
     //TODO :See how we can reuse mapping code from above
-   
-    //Build View Model based on template
-     for (var i = 0; i < recordTemplate.Fields.length; i++) {
 
-         var thisField = recordTemplate.Fields[i];
+    //Build View Model based on template
+    for (var i = 0; i < recordTemplate.Fields.length; i++) {
+
+        var thisField = recordTemplate.Fields[i];
 
 
         var fieldVM = new FieldVM(thisField.Label);
         fieldVM.DisplayOrder = thisField.DisplayOrder;
         fieldVM.Type = thisField.Type;
         fieldVM.Interface = thisField.Interface;
-        if(thisField.Required) fieldVM.Required = thisField.Required;
+        if (thisField.Required) fieldVM.Required = thisField.Required;
 
         for (var j = 0; j < thisField.Options.length; j++) {
 
@@ -480,10 +480,10 @@ function RecordVM(recordTemplate, record) {
 
     }
 
-   
-   
+
+
     self.Status = 'Draft'; //['Draft', 'Working', 'Dirty', 'Saving', 'Saved', 'Failed', 'ToBeDeleted']
-    
+
 }
 
 function FieldVM(label) {
@@ -497,13 +497,13 @@ function FieldVM(label) {
     self.DisplayOrder = 0;
     self.Label = label;
 
-    
+
     self.Description = 'description for' + label;
     self.HelpContent = 'Help Content for ' + label;
-    
+
 
     self.HasFocus = ko.observable(false);
-    
+
     self.Options = [];
 
 
@@ -512,12 +512,49 @@ function FieldVM(label) {
     self.Input = ko.observable('');
     self.Value = ko.computed({
         read: function () {
-            return this.Input().toUpperCase();
+
+            if (this.Input().length == 0) return this.Input();
+
+
+            if (self.Interface == 'dropdown') {
+
+                for (var o = 0; o < this.Options.length; o++) {
+
+                    if (this.Options[o].Value.toLowerCase().indexOf(this.Input().toLowerCase()) == 0) {
+                        return this.Options[o].Value.toUpperCase();
+                    }
+
+                    if (this.Options[o].Value.toLowerCase() == this.Input().toLowerCase()) {
+                        return this.Options[o].Value.toUpperCase();
+                    }
+
+                    for (var k = 0; k < this.Options[o].AccessKeys.length; k++) {
+                        if (this.Options[o].AccessKeys[k].toLowerCase() == this.Input().toLowerCase()) {
+                            return this.Options[o].Value.toUpperCase();
+                        }
+                    }
+                }
+            }
+
+            if (self.Interface == 'textbox') {
+                if (self.Type == 'number') {
+                    //TODO: Validate for range, digits, precision  
+                }
+
+                if (self.Type == 'string') {
+                    //TODO: Validate for max length
+                }
+
+                return self.Input();
+            }
+            return '';
+
+
         },
         write: function (value) {
-            this.Input(value); 
+            this.Input(value);
         },
-        owner : self
+        owner: self
     });
 
     self.Value.subscribe(function (newValue) {
@@ -531,7 +568,7 @@ function FieldVM(label) {
 
     });
 
-    
+
 
     self.SelectNextOption = function () {
         //TODO: Implement this
@@ -558,6 +595,9 @@ function OptionVM(value, label) {
 
     self.Value = value;
     self.Label = label;
+
+    self.DisplayOrder = 0;
+    self.AccessKeys = [];
     self.Selected = ko.observable(false);
 
 }
