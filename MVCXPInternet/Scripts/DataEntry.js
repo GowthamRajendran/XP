@@ -414,20 +414,31 @@ function RecordTemplate(recordTemplateAsJSON) {
     self.Fields = [];
 
     //Build View Model based on template
-
     for (var i = 0; i < recordTemplateAsJSON.Fields.length; i++) {
 
         var thisField = recordTemplateAsJSON.Fields[i];
 
         var fieldVM = new FieldVM(thisField.Label);
+        fieldVM.DisplayOrder = thisField.DisplayOrder;
+        fieldVM.Type = thisField.Type;
+        fieldVM.Interface = thisField.Interface;
+        if (thisField.Required) fieldVM.Required = thisField.Required;
+
         for (var j = 0; j < thisField.Options.length; j++) {
+
             var thisOption = thisField.Options[j];
-            fieldVM.Options.push(new OptionVM(thisOption.Value, thisOption.Label));
+
+            var optionVM = new OptionVM(thisOption.Value, thisOption.Label);
+            optionVM.DisplayOrder = thisOption.DisplayOrder;
+            if (thisOption.AccessKeys) optionVM.AccessKeys = thisOption.AccessKeys;
+
+            fieldVM.Options.push(optionVM);
+
         }
 
         self.Fields.push(fieldVM);
     }
-    
+
 }
 
 function RecordVM(recordTemplate, record) {
@@ -437,27 +448,40 @@ function RecordVM(recordTemplate, record) {
     self.RecordTemplate = recordTemplate;
     self.Id = 0;
     self.Fields = [];
+
+
+    //TODO :Consider using extensions
+    //TODO :See how we can reuse mapping code from above
    
     //Build View Model based on template
-    $.each(recordTemplate.Fields, function (i) {
-        var thisField = this;
+     for (var i = 0; i < recordTemplate.Fields.length; i++) {
+
+         var thisField = recordTemplate.Fields[i];
+
+
         var fieldVM = new FieldVM(thisField.Label);
-        $.each(thisField.Options, function (j) {
-            var thisOption = this;
-            //fieldVM.Options.push(ko.mapping.fromJS(new OptionVM(thisOption.Value, thisOption.Label)));
-            fieldVM.Options.push(new OptionVM(thisOption.Value, thisOption.Label));
-        });
+        fieldVM.DisplayOrder = thisField.DisplayOrder;
+        fieldVM.Type = thisField.Type;
+        fieldVM.Interface = thisField.Interface;
+        if(thisField.Required) fieldVM.Required = thisField.Required;
 
-        //Setting the record as the parent
-        fieldVM.Parent = self;
+        for (var j = 0; j < thisField.Options.length; j++) {
 
-        //self.Fields.push(ko.mapping.fromJS(fieldVM));
+            var thisOption = thisField.Options[j];
+
+            var optionVM = new OptionVM(thisOption.Value, thisOption.Label);
+            optionVM.DisplayOrder = thisOption.DisplayOrder;
+            if (thisOption.AccessKeys) optionVM.AccessKeys = thisOption.AccessKeys;
+
+            fieldVM.Options.push(optionVM);
+        }
+
         self.Fields.push(fieldVM);
 
-    });
+    }
 
-    self.CurrentField = self.Fields[3];
-
+   
+   
     self.Status = 'Draft'; //['Draft', 'Working', 'Dirty', 'Saving', 'Saved', 'Failed', 'ToBeDeleted']
     
 }
@@ -467,10 +491,16 @@ function FieldVM(label) {
     var self = this;
     self.Parent = null;
     self.Id = 0;
+    self.Required = false;
+    self.Type = 'string';
+    self.Interface = 'textbox';
+    self.DisplayOrder = 0;
     self.Label = label;
+
+    
     self.Description = 'description for' + label;
     self.HelpContent = 'Help Content for ' + label;
-    self.DisplayOrder = 0;
+    
 
     self.HasFocus = ko.observable(false);
     
