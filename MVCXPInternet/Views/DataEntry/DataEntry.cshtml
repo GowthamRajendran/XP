@@ -2,18 +2,26 @@
     ViewBag.Title = "Index";
 }
 <style type="text/css">
-    .dataEntryGrid
+    #recordListingContainer
+    {
+        background-color: #FFF;
+        border: solid 1px #AAA;
+        height: 500px;
+        overflow: auto;
+    }
+    
+    #recordListing
     {
         margin-top: 0px;
     }
     
-    .dataEntryGrid th, .dataEntryGrid td
+    #recordListing th, #recordListing td
     {
         border: solid 1px #CCC;
         margin: 0px;
     }
     
-    .dataEntryGrid th
+    #recordListing th
     {
         background-color: #DDD;
         padding: 5px 2px;
@@ -21,79 +29,147 @@
         font-weight: normal;
     }
     
-    .dataEntryGrid tr.record
+    #recordListing tr.record
     {
         background-color: #FFF;
         padding: 3px;
     }
     
-    .dataEntryGrid tr.draft
+    #recordListing tr.draft
     {
         background-color: #EEE;
         padding: 3px;
     }
     
-    .dataFieldInfoContainer
+    #dataFieldInfoContainer
     {
-        border: solid 1px gray;
+        border: solid 1px #CCC;
         margin: 0px;
-        padding: 13px;
+        padding: 15px;
         background-color: #EEE;
+        min-height: 215px;
     }
     
     
-    .optionscontainer
+    #dataFieldInfoContainer .optionscontainer
     {
     }
     
-    .optionscontainer .option
+    #dataFieldInfoContainer .optionscontainer .option
     {
         border: solid 1px #5873a7;
         background-color: #cfdefc;
-        padding: 3px;
-        margin: 3px;
+        padding: 0px;
+        margin: 2px;
         float: left;
         width: 450px;
     }
     
-    .optionscontainer .option.selected
+    #dataFieldInfoContainer .optionscontainer .option.selected
     {
         border: solid 1px #224992;
         background-color: #4268af;
         color: #FFF;
     }
     
-    .optionscontainer .option table
+    #dataFieldInfoContainer .optionscontainer .option table
     {
         margin: 0px;
     }
     
-    .optionscontainer .option .optionKey
+    #dataFieldInfoContainer .optionscontainer .option .optionKey
     {
         width: 15px;
         font-weight: bold;
-        font-size: 1.3em;
-        vertical-align: top;
+        font-size: 1.1em;
+        vertical-align: middle;
         padding: 5px;
     }
-    .optionscontainer .option .optionLabel
+    #dataFieldInfoContainer .optionscontainer .option .optionLabel
     {
         padding: 0px;
+        vertical-align: middle;
     }
     
     
-    #currentFieldPreview
+    #dataFieldInfoContainer #currentFieldPreview
     {
-        font-size: 1.5em;
+        font-size: 1.1em;
         font-weight: bold;
-        border: solid 1px #CCC;
-        background-color: #FFF;
-        padding: 5px;
+        padding: 2px;
     }
-    #editor
+    
+    #dataFieldInfoContainer #currentFieldPreview .fieldLabel
     {
-        background-color: #AAA;
-        color: #FFF;
+    }
+    
+    #dataFieldInfoContainer #currentFieldPreview .fieldValue
+    {
+    }
+    
+    #editorContainer
+    {
+        background-color: #DDD;
+        color: #333;
+    }
+    
+    
+    
+    #editorContainer table tr td
+    {
+        padding: 0em;
+        margin: 0em;
+        border:solid 1px #AAA;
+        text-align: center;
+    }
+    #editorContainer .labels td
+    {
+        padding: 0.25em;
+    }
+    
+    #editorContainer .controls td
+    {
+        /*border-top-width:0px;*/
+    }
+    
+    #editorContainer .labels .currentField
+    {
+        background-color: #cfdefc;
+        border: solid 1px #5873a7;
+        
+    }
+    
+    #editorContainer .controls .currentField 
+    {
+        border: solid 1px #5873a7;
+        background-color: White;
+        font-weight: bold;
+    }
+    
+    #editorContainer input
+    {
+        margin: 0px;
+        padding: 5px 2px;
+        width: 100%;
+    }
+    
+    #editorContainer input.datepicker
+    {
+        /*width: 100px !important;*/
+    }
+    
+    #editorContainer input[type=button]
+    {
+        padding: 5px 0px;
+        width:25px !important;
+        border: solid 1px #AAA;
+        background-color:#DDD;
+    }
+    
+    #editorContainer input[type=button]:focus
+    {
+        border: solid 1px #224992;
+        background-color:#cfdefc;
     }
     
     
@@ -109,11 +185,18 @@
     
     #outputConsole
     {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        width: 300px;
         border: solid 1px #CCC;
-        padding: 20px;
-        margin-top: 10px;
+        padding: 5px;
         background-color: #EEE;
     }
+    
+  
+    
+    
 </style>
 <h2>
     Data Entry - Dynamic form</h2>
@@ -125,9 +208,8 @@
             data-bind="text: Records().length"></span>&nbsp;Pending : <span data-bind="text: PendingRecords().length">
             </span>&nbsp;/&nbsp;<span data-bind="text: Records().length"></span></h4>
 </div>
-<div id="formContainer" style="background-color: #FFF; border: solid 1px gray; height: 500px;
-    overflow: auto">
-    <table cellpadding="2" cellspacing="0" border="1" class="dataEntryGrid" width="100%">
+<div id="recordListingContainer">
+    <table id="recordListing" cellpadding="2" cellspacing="0" border="1" width="100%">
         <thead>
             <tr>
                 <!-- ko foreach: Draft.Fields -->
@@ -154,17 +236,17 @@
         </tbody>
     </table>
 </div>
-<div class="dataFieldInfoContainer">
+<div id="dataFieldInfoContainer">
     <div class="optionscontainer">
         <!-- ko foreach: Draft.Fields -->
         <div id="currentFieldPreview" data-bind="visible: HasFocus">
-            <span data-bind="text: Label"></span>: <span data-bind="text: Value">
-            </span>
+            <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue"
+                data-bind="text: Value"></span>
         </div>
         <div class="fieldOptions" data-bind="visible: HasFocus">
             <!-- ko foreach: Options -->
             <div class="option" data-bind="css: { selected: Selected }">
-                <table width="100%" border="1" cellpadding="0" cellspacing="0">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="optionKey">
                             <span data-bind="text: Value"></span>
@@ -181,26 +263,25 @@
         <!-- /ko -->
     </div>
 </div>
-<div class="editor">
+<div id="editorContainer">
     <table cellpadding="0" cellspacing="0" border="1" width="100%">
-        <tr>
+        <tr class="labels">
             <!-- ko foreach: Draft.Fields -->
-            <td data-bind="text: Label" style="text-align: left; padding: 0px;">
+            <td data-bind="text: Label, css:{currentField: HasFocus}">
             </td>
             <!-- /ko -->
-            <td style="text-align: left; padding: 0px;">
+            <td>
                 &nbsp;
             </td>
         </tr>
-        <tr>
+        <tr class="controls">
             <!-- ko foreach: Draft.Fields -->
-            <td style="text-align: left; padding: 0px; width: 55px;">
-                <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus"
-                    style="width: 40px; margin: 0px; padding: 5px 2px" />
+            <td data-bind="css:{currentField: HasFocus}">
+                <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}" />
             </td>
             <!-- /ko -->
-            <td style="text-align: left; padding: 0px;">
-                <input type="button" value="Save" style="padding: 4px 1px;" />
+            <td>
+                <input id="saveButton "type="button" value="Sv"  />
             </td>
         </tr>
     </table>
@@ -218,7 +299,6 @@
 
     });
 </script>
-<input id="Submit" type="button" value="Submit" />
 <div id="outputConsole">
     <ul id="messages">
     </ul>

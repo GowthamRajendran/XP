@@ -9,6 +9,8 @@
 /// <reference path="linq.js" />
 /// <reference path="jquery.linq.js" />
 
+
+var OutputConsole = $("#messages");
 $(document).ready(function () {
 
 
@@ -85,8 +87,8 @@ $(document).ready(function () {
                 Label: 'Location of Intubation',
                 Type: 'number', Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Your ICU' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Another ICU in your hospital' },
+                    { DisplayOrder: '1', Value: '0', ChoiceNum: '1', Label: 'Your ICU' },
+                    { DisplayOrder: '2', Value: '1', ChoiceNum: '1', Label: 'Another ICU in your hospital' },
                     { DisplayOrder: '3', Value: '2', Label: 'Outside hospital' },
                     { DisplayOrder: '4', Value: '3', Label: 'OR' },
                     { DisplayOrder: '5', Value: '4', Label: 'Rapid Response Team (RRT)' },
@@ -256,28 +258,43 @@ $(document).ready(function () {
             key = e.which;
         }
 
-        var index = 0; // app.Draft.SelectedIndex();
-
         switch (key) {
             case 13: //Enter
                 app.SubmitDraft();
                 break;
             case 27: //Escape
-                //TODO: Clear any selection/input in the control under focus
+                var currentField = app.Draft.FieldInFocus();
+                if (currentField != null) {
+                    currentField.ClearSelection();
+                }
                 break;
             case 32: //Space
                 break;
             case 37: //Left
+                var currentField = app.Draft.FieldInFocus();
+                if (currentField != null) {
+                    currentField.SelectPreviousOption();
+                }
                 break;
             case 39: //Right
+                var currentField = app.Draft.FieldInFocus();
+                if (currentField != null) {
+                    currentField.SelectNextOption();
+                }
                 break;
             case 38: //Up
-                if (app.CurrentField != null) app.CurrentField.SelectPreviousOption();
-                index -= 1;
+                var currentField = app.Draft.FieldInFocus();
+                if (currentField != null) {
+                    currentField.SelectPreviousOption();
+                    currentField.SelectPreviousOption();
+                }
                 break;
             case 40: //Down
-                if (app.CurrentField != null) app.CurrentField.SelectNextOption();
-                index += 1;
+                var currentField = app.Draft.FieldInFocus();
+                if (currentField != null) {
+                    currentField.SelectNextOption();
+                    currentField.SelectNextOption();
+                }
                 break;
 
         }
@@ -304,7 +321,7 @@ function DataEntryForm(recordTemplate, options) {
     self.Draft = ko.mapping.fromJS(new RecordVM(self.RecordTemplate));
     self.Records = ko.observableArray([]);
     self.RecordCount = ko.observable(0);
-    self.CurrentField = null;
+    
 
     //Computed Properties
     self.ProcessedRecords = ko.computed(function () { return ko.utils.arrayFilter(self.Records(), function (record) { return record.Status() == 'Saved' }); }, self);
@@ -389,9 +406,12 @@ function DataEntryForm(recordTemplate, options) {
 
 
         //RESET DRAFT
-        //        ko.utils.arrayForEach(self.Draft.Fields(), function (field) {
-        //            field.Value('');
-        //        });
+        ko.utils.arrayForEach(self.Draft.Fields(), function (field) {
+            field.Value('');
+            if (field.DisplayOrder() == 1) field.HasFocus(true);
+        });
+
+
 
         //PROCESS RECORD : TODO : Send  and accept the record data in right format
         self.RecordProcessor.processRecord(self.RecordCount())
@@ -449,6 +469,26 @@ function RecordVM(recordTemplate, record) {
     self.Id = 0;
     self.Fields = [];
 
+
+//    this.GetFieldInFocus = function () {
+//        var fieldInFocus = ko.utils.arrayFirst(self.Fields, function (field) {
+//            return field.HasFocus() === true;
+//        });
+
+//        
+//        return fieldInFocus;
+//    }
+
+
+    self.FieldInFocus = ko.computed({
+        read: function () {
+            return ko.utils.arrayFirst(self.Fields, function (field) {
+                return field.HasFocus() === true;
+            });
+        },
+        owner: self,
+        deferEvaluation: true
+    });
 
     //TODO :Consider using extensions
     //TODO :See how we can reuse mapping code from above
@@ -512,7 +552,8 @@ function FieldVM(label) {
     self.Input = ko.observable('');
     self.Value = ko.computed({
         read: function () {
-
+            OutputConsole.append('<li>' + this.Input() + '</li>');
+            
             if (this.Input().length == 0) return this.Input();
 
 
@@ -520,13 +561,14 @@ function FieldVM(label) {
 
                 for (var o = 0; o < this.Options.length; o++) {
 
-                    if (this.Options[o].Value.toLowerCase().indexOf(this.Input().toLowerCase()) == 0) {
+                    if (
+                        (this.Options[o].Value.toLowerCase().indexOf(this.Input().toLowerCase()) == 0) |
+                        (this.Input().toLowerCase().indexOf(this.Options[o].Value.toLowerCase()) == 0) |
+                        (this.Options[o].Value.toLowerCase() == this.Input().toLowerCase())
+                        ) {
                         return this.Options[o].Value.toUpperCase();
                     }
 
-                    if (this.Options[o].Value.toLowerCase() == this.Input().toLowerCase()) {
-                        return this.Options[o].Value.toUpperCase();
-                    }
 
                     for (var k = 0; k < this.Options[o].AccessKeys.length; k++) {
                         if (this.Options[o].AccessKeys[k].toLowerCase() == this.Input().toLowerCase()) {
@@ -569,23 +611,50 @@ function FieldVM(label) {
     });
 
 
-
-    self.SelectNextOption = function () {
-        //TODO: Implement this
+    function GetSelectedIndex() {
+        for (var i = 0; i < self.Options.length; i++) {
+            if (self.Options[i].Selected() == true) {
+                return i;
+            }
+        }
+        return -1;
     }
+
+    //For Keyboard Support
+    self.SelectNextOption = function () {
+        var currentSelection = GetSelectedIndex();
+        if (currentSelection == -1) {
+            this.Input(this.Options[0].Value);
+        } else {
+            this.Input(this.Options[(currentSelection + 2 > this.Options.length) ? 0 : currentSelection + 1].Value);
+        }
+    }
+
 
     self.SelectPreviousOption = function () {
-        //TODO: Implement this
+        var currentSelection = GetSelectedIndex();
+        if (currentSelection == -1) {
+            //this.Input(this.Options[this.Options.length - 1].Value);
+            this.Input(this.Options[0].Value);
+        } else {
+            this.Input(this.Options[(currentSelection < 1) ? this.Options.length - 1 : currentSelection - 1].Value);
+        }
     }
 
-    self.SelectByValue = function (value) {
-        //TODO: Implement this
+    self.SelectOptionAbove = function () {
+        var currentSelection = GetSelectedIndex();
+        if (currentSelection == -1) {
+            //this.Input(this.Options[this.Options.length - 1].Value);
+            this.Input(this.Options[0].Value);
+        } else {
+            this.Input(this.Options[(currentSelection < 1) ? this.Options.length - 1 : currentSelection - 1].Value);
+        }
     }
-
-    self.SelectByIndex = function (index) {
-        //TODO: Implement this
+    
+    self.ClearSelection = function () {
+        this.Input('');
     }
-
+    
 }
 
 
