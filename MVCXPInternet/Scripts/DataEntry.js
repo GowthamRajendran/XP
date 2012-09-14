@@ -554,27 +554,32 @@ function FieldVM(label) {
     self.Input = ko.observable('');
     self.Value = ko.computed({
         read: function () {
-            OutputConsole.append('<li>' + this.Input() + '</li>');
-            
-            if (this.Input().length == 0) return this.Input();
+
+            var input = this.Input();
+
+            OutputConsole.append('<li>' + input + '</li>');
+
+            if (input.length == 0) return input;
 
 
             if (self.Interface == 'dropdown') {
 
                 for (var o = 0; o < this.Options.length; o++) {
 
+                    var thisOption = this.Options[o];
+
                     if (
-                        (this.Options[o].Value.toLowerCase().indexOf(this.Input().toLowerCase()) == 0) |
-                        (this.Input().toLowerCase().indexOf(this.Options[o].Value.toLowerCase()) == 0) |
-                        (this.Options[o].Value.toLowerCase() == this.Input().toLowerCase())
+                        (thisOption.Value.toLowerCase().indexOf(input.toLowerCase()) == 0) |
+                        (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0) |
+                        (thisOption.Value.toLowerCase() == input.toLowerCase())
                         ) {
-                        return this.Options[o].Value.toUpperCase();
+                        return thisOption.Value;
                     }
 
 
-                    for (var k = 0; k < this.Options[o].AccessKeys.length; k++) {
-                        if (this.Options[o].AccessKeys[k].toLowerCase() == this.Input().toLowerCase()) {
-                            return this.Options[o].Value.toUpperCase();
+                    for (var k = 0; k < thisOption.Value.AccessKeys.length; k++) {
+                        if (thisOption.Value.AccessKeys[k].toLowerCase() == input.toLowerCase()) {
+                            return thisOption.Value;
                         }
                     }
                 }
