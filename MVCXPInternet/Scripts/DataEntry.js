@@ -77,8 +77,8 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { Value: '0', Label: 'Other'},
-                    { Value: '1', Label: 'Tracheostomy'}
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Tracheostomy' }
                 ]
             },
             {
@@ -325,7 +325,7 @@ function DataEntryForm(recordTemplate, options) {
     self.Draft = ko.mapping.fromJS(new RecordVM(self.RecordTemplate));
     self.Records = ko.observableArray([]);
     self.RecordCount = ko.observable(0);
-    
+
 
     //Computed Properties
     self.ProcessedRecords = ko.computed(function () { return ko.utils.arrayFilter(self.Records(), function (record) { return record.Status() == 'Saved' }); }, self);
@@ -391,7 +391,10 @@ function DataEntryForm(recordTemplate, options) {
     }
 
     self.SubmitDraft = function () {
-
+        if (self.Draft.IsInvalid()) {
+            alert('Invalid values found');
+            return;
+        }
         var newRecord = ko.mapping.fromJS(ko.toJS(self.Draft));
         self.RecordCount(self.RecordCount() + 1);
         newRecord.Id(self.RecordCount());
@@ -472,14 +475,14 @@ function RecordVM(recordTemplate, record) {
     self.Fields = [];
 
 
-//    this.GetFieldInFocus = function () {
-//        var fieldInFocus = ko.utils.arrayFirst(self.Fields, function (field) {
-//            return field.HasFocus() === true;
-//        });
+    //    this.GetFieldInFocus = function () {
+    //        var fieldInFocus = ko.utils.arrayFirst(self.Fields, function (field) {
+    //            return field.HasFocus() === true;
+    //        });
 
-//        
-//        return fieldInFocus;
-//    }
+    //        
+    //        return fieldInFocus;
+    //    }
 
 
     self.FieldInFocus = ko.computed({
@@ -487,6 +490,18 @@ function RecordVM(recordTemplate, record) {
             return ko.utils.arrayFirst(self.Fields, function (field) {
                 return field.HasFocus() === true;
             });
+        },
+        owner: self,
+        deferEvaluation: true
+    });
+
+    self.IsInvalid = ko.computed({
+        read: function () {
+            var IsInValid = false;
+            ko.utils.arrayForEach(self.Fields, function (field) {
+                if (field.IsInputInvalid()) IsInValid = true;
+            });
+            return IsInValid;
         },
         owner: self,
         deferEvaluation: true
@@ -537,7 +552,8 @@ function FieldVM(label) {
     self.Interface = 'textbox';
     self.DisplayOrder = 0;
     self.Label = label;
-
+    self.MinValue = 0;
+    self.MaxValue = 9;
 
     self.Description = 'description for' + label;
     self.HelpContent = 'Help Content for ' + label;
@@ -551,14 +567,18 @@ function FieldVM(label) {
     //self.Value = ko.observable('');
 
 
-    self.IsInputValid = ko.observable(true);
+    self.IsInputInvalid = ko.observable(true);
+    self.WhyInvalid = ko.observable('');
 
 
     self.Input = ko.observable('');
     self.EffectiveValue = ko.computed({
         read: function () {
 
-            var input = this.Input();
+            var input = self.Input();
+
+            self.IsInputInvalid(false);
+            self.WhyInvalid('');
 
             if (input.length == 0) return input;
 
@@ -585,29 +605,44 @@ function FieldVM(label) {
                     }
 
                     //Cant use this as an input of N/A will match with Option N
-//                    if (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0) 
-//                    {
-//                        return thisOption.Value;
-//                    }
+                    //                    if (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0) 
+                    //                    {
+                    //                        return thisOption.Value;
+                    //                    }
+
+
                 }
+
+                self.IsInputInvalid(true);
+                self.WhyInvalid('Input value cannot be resolved');
+                return input;
             }
 
             if (self.Interface == 'textbox') {
                 if (self.Type == 'number') {
-                    //TODO: Validate for range, digits, precision  
+                    if (isNaN(input)) {
+                        self.IsInputInvalid(true);
+                        self.WhyInvalid('A number is expected here');
+                    } else if (parseFloat(input) > this.MaxValue) {
+                        self.IsInputInvalid(true);
+                        self.WhyInvalid('Value needs to be less than ' + this.MaxValue);
+                    } else if (parseFloat(input) < this.MinValue) {
+                        self.IsInputInvalid(true);
+                        self.WhyInvalid('Value needs to be greater than ' + this.MinValue);
+                    }
+                } else if (self.Type == 'string') {
+                    //TODO: Validate for max length. As on now none of our fields are strings. 
                 }
 
-                if (self.Type == 'string') {
-                    //TODO: Validate for max length
-                }
-
-                return self.Input();
             }
 
             if (self.Interface == 'datepicker') {
-                return self.Input();
+                //TODO: Date validation
             }
-            return '';
+
+
+
+            return input;
 
 
         },
@@ -618,7 +653,7 @@ function FieldVM(label) {
     });
 
     self.EffectiveValue.subscribe(function (newValue) {
-       
+
         if (self.Options.length == 0) return;
 
         $.each(self.Options, function () {
@@ -629,9 +664,9 @@ function FieldVM(label) {
     });
 
     self.AutoAdjust = function () {
-        this.Input(this.EffectiveValue()); 
+        this.Input(this.EffectiveValue());
     }
-    
+
     self.SelectedIndex = ko.computed({
         read: function () {
             for (var i = 0; i < self.Options.length; i++) {
@@ -653,7 +688,7 @@ function FieldVM(label) {
             this.Input(this.Options[(currentSelection + 2 > this.Options.length) ? 0 : currentSelection + 1].Value);
         }
     }
-    
+
     self.SelectPreviousOption = function () {
         var currentSelection = self.SelectedIndex();
         if (currentSelection == -1) {

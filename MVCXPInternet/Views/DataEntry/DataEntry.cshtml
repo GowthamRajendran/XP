@@ -116,7 +116,7 @@
         font-size: 1.1em;
         font-weight: bold;
         padding: 2px;
-        display:none;
+        /*display:none;*/
     }
     
     #dataFieldInfoContainer #currentFieldPreview .fieldLabel
@@ -160,6 +160,12 @@
         border-bottom:solid 5px #5873a7;
     }
     
+    #editorContainer tr.controls td.invalid
+    {
+        border-bottom:solid 5px Red;
+        color:Red;
+    }
+    
     
     
     #editorContainer tr.controls td.currentField
@@ -179,6 +185,12 @@
         padding: 5px;
         background-color: transparent;
         border-style: none;
+    }
+    
+    span.invalid, 
+    #editorContainer input.invalid
+    {
+        color: Red;
     }
     
     #editorContainer input.datepicker
@@ -266,7 +278,7 @@
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
             <tr class="labels">
                 <!-- ko foreach: Draft.Fields -->
-                <td data-bind="text: Label, css:{currentField: HasFocus}">
+                <td data-bind="text: Label, css:{currentField: HasFocus, invalid: IsInputInvalid}">
                 </td>
                 <!-- /ko -->
                 <td>
@@ -275,8 +287,8 @@
             </tr>
             <tr class="controls">
                 <!-- ko foreach: Draft.Fields -->
-                <td data-bind="css:{currentField: HasFocus}">
-                    <input type="text" data-bind="value: Input, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}, event: { blur: AutoAdjust}" />
+                <td data-bind="css:{currentField: HasFocus, invalid: IsInputInvalid}">
+                    <input type="text" data-bind="value: Input, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus, invalid: IsInputInvalid}, event: { blur: AutoAdjust}" />
                 </td>
                 <!-- /ko -->
                 <td>
@@ -289,7 +301,10 @@
         <div class="optionscontainer">
             <!-- ko foreach: Draft.Fields -->
             <div id="currentFieldPreview" data-bind="visible: HasFocus">
-                <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue" data-bind="text: Input" />
+                <span class="fieldLabel" data-bind="text: Label"></span>: 
+                <span class="fieldValue invalid" data-bind="visible: IsInputInvalid, text: WhyInvalid" ></span>
+                <span class="fieldValue" data-bind="visible: !IsInputInvalid(), text: Input" ></span>
+                
             </div>
             <div class="fieldOptions" data-bind="visible: HasFocus">
                 <!-- ko foreach: Options -->
