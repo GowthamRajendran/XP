@@ -77,8 +77,8 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Tracheostomy' }
+                    { Value: '0', Label: 'Other'},
+                    { Value: '1', Label: 'Tracheostomy'}
                 ]
             },
             {
@@ -87,15 +87,15 @@ $(document).ready(function () {
                 Label: 'Location of Intubation',
                 Type: 'number', Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', ChoiceNum: '1', Label: 'Your ICU' },
-                    { DisplayOrder: '2', Value: '1', ChoiceNum: '1', Label: 'Another ICU in your hospital' },
-                    { DisplayOrder: '3', Value: '2', Label: 'Outside hospital' },
-                    { DisplayOrder: '4', Value: '3', Label: 'OR' },
-                    { DisplayOrder: '5', Value: '4', Label: 'Rapid Response Team (RRT)' },
-                    { DisplayOrder: '6', Value: '5', Label: 'ED' },
-                    { DisplayOrder: '7', Value: '6', Label: 'Cardiovascular and Interventional Laboratory (CVDL)' },
-                    { DisplayOrder: '8', Value: '7', Label: 'During a code on the floor' },
-                    { DisplayOrder: '9', Value: '8', Label: 'Another location not listed above' }
+                    { Value: '0', ChoiceNum: '1', Label: 'Your ICU' },
+                    { Value: '1', ChoiceNum: '1', Label: 'Another ICU in your hospital' },
+                    { Value: '2', Label: 'Outside hospital' },
+                    { Value: '3', Label: 'OR' },
+                    { Value: '4', Label: 'Rapid Response Team (RRT)' },
+                    { Value: '5', Label: 'ED' },
+                    { Value: '6', Label: 'Cardiovascular and Interventional Laboratory (CVDL)' },
+                    { Value: '7', Label: 'During a code on the floor' },
+                    { Value: '8', Label: 'Another location not listed above' }
                 ]
             },
             {
@@ -105,9 +105,9 @@ $(document).ready(function () {
                 Type: 'string',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'N/A', Label: 'Not Applicable', AccessKeys: ['na', '/', '2']} //Test Case
+                    { Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { Value: 'N/A', Label: 'Not Applicable', AccessKeys: ['na', '/', '2']} //Test Case
                 ]
             },
             {
@@ -117,9 +117,9 @@ $(document).ready(function () {
                 Type: 'string',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'C', Label: 'Contraindicated', AccessKeys: ['2'] }
+                    { Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { Value: 'C', Label: 'Contraindicated', AccessKeys: ['2'] }
                 ]
             },
             {
@@ -129,16 +129,16 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Hypotension' },
-                    { DisplayOrder: '3', Value: '2', Label: 'Unstable Physiological Status' },
-                    { DisplayOrder: '4', Value: '3', Label: 'Low Cardiac Index' },
-                    { DisplayOrder: '5', Value: '4', Label: 'Cervical, thoracic or lumbar surgery or instability' },
-                    { DisplayOrder: '6', Value: '5', Label: 'LVAD' },
-                    { DisplayOrder: '7', Value: '6', Label: 'RVAD' },
-                    { DisplayOrder: '8', Value: '7', Label: 'Intra aortic balloon pump' },
-                    { DisplayOrder: '9', Value: '8', Label: 'Open abdomen' },
-                    { DisplayOrder: '10', Value: '9', Label: 'Patient refusal' }
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Hypotension' },
+                    { Value: '2', Label: 'Unstable Physiological Status' },
+                    { Value: '3', Label: 'Low Cardiac Index' },
+                    { Value: '4', Label: 'Cervical, thoracic or lumbar surgery or instability' },
+                    { Value: '5', Label: 'LVAD' },
+                    { Value: '6', Label: 'RVAD' },
+                    { Value: '7', Label: 'Intra aortic balloon pump' },
+                    { Value: '8', Label: 'Open abdomen' },
+                    { Value: '9', Label: 'Patient refusal' }
                 ]
             },
             {
@@ -156,8 +156,8 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Patient refusal' }
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Patient refusal' }
                 ]
             },
             {
@@ -175,12 +175,12 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Patient is known to have an allergic or hypersensitivity reaction to chlorhexidine' },
-                    { DisplayOrder: '3', Value: '2', Label: 'Patient is < 2 months of age' },
-                    { DisplayOrder: '4', Value: '3', Label: 'There is a possibility of direct contact of CHG with meninges' },
-                    { DisplayOrder: '5', Value: '4', Label: 'ALL oral care is contraindicated.  (In this case, the answer in the Oral Care column for this patient should also be “C”.)' },
-                    { DisplayOrder: '6', Value: '5', Label: 'Patient refusal' }
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Patient is known to have an allergic or hypersensitivity reaction to chlorhexidine' },
+                    { Value: '2', Label: 'Patient is < 2 months of age' },
+                    { Value: '3', Label: 'There is a possibility of direct contact of CHG with meninges' },
+                    { Value: '4', Label: 'ALL oral care is contraindicated.  (In this case, the answer in the Oral Care column for this patient should also be “C”.)' },
+                    { Value: '5', Label: 'Patient refusal' }
                 ]
             },
             {
@@ -190,9 +190,9 @@ $(document).ready(function () {
                 Type: 'string',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
+                    { Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
                 ]
             },
             {
@@ -202,12 +202,12 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Patient is receiving a sedative infusion for active seizures or alcohol withdrawal.' },
-                    { DisplayOrder: '3', Value: '2', Label: 'Patient is receiving escalating sedative doses due to ongoing agitation.' },
-                    { DisplayOrder: '4', Value: '3', Label: 'Patient is receiving neuromuscular blockers.' },
-                    { DisplayOrder: '5', Value: '4', Label: 'Patient has had evidence of active myocardial ischemia in the previous 24 hrs.' },
-                    { DisplayOrder: '6', Value: '5', Label: 'Patient has had evidence of increased intracranial pressure.' }
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Patient is receiving a sedative infusion for active seizures or alcohol withdrawal.' },
+                    { Value: '2', Label: 'Patient is receiving escalating sedative doses due to ongoing agitation.' },
+                    { Value: '3', Label: 'Patient is receiving neuromuscular blockers.' },
+                    { Value: '4', Label: 'Patient has had evidence of active myocardial ischemia in the previous 24 hrs.' },
+                    { Value: '5', Label: 'Patient has had evidence of increased intracranial pressure.' }
                 ]
             },
             {
@@ -217,9 +217,9 @@ $(document).ready(function () {
                 Type: 'string',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
-                    { DisplayOrder: '2', Value: 'N', Label: 'No', AccessKeys: ['1'] },
-                    { DisplayOrder: '3', Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
+                    { Value: 'Y', Label: 'Yes', AccessKeys: ['0'] },
+                    { Value: 'N', Label: 'No', AccessKeys: ['1'] },
+                    { Value: 'C/NI', Label: 'Contraindicated / Not Indicated', AccessKeys: ['c', '2']} //Test Case
                 ]
             },
             {
@@ -229,12 +229,12 @@ $(document).ready(function () {
                 Type: 'number',
                 Interface: 'dropdown',
                 Options: [
-                    { DisplayOrder: '1', Value: '0', Label: 'Other' },
-                    { DisplayOrder: '2', Value: '1', Label: 'Doesn’t have adequate oxygenation [SpO2 < 88% on an F1O2 of <= 50%and a PEEP of <=3 cm H2O' },
-                    { DisplayOrder: '3', Value: '2', Label: 'No spontaneous inspiratory effort in a 5-min period.' },
-                    { DisplayOrder: '4', Value: '3', Label: 'Acute agitation requiring escalating sedative doses.' },
-                    { DisplayOrder: '5', Value: '4', Label: 'Significant use of vasopressors or inotropes.' },
-                    { DisplayOrder: '6', Value: '5', Label: 'Evidence of increased intracranial pressure.' }
+                    { Value: '0', Label: 'Other' },
+                    { Value: '1', Label: 'Doesn’t have adequate oxygenation [SpO2 < 88% on an F1O2 of <= 50%and a PEEP of <=3 cm H2O' },
+                    { Value: '2', Label: 'No spontaneous inspiratory effort in a 5-min period.' },
+                    { Value: '3', Label: 'Acute agitation requiring escalating sedative doses.' },
+                    { Value: '4', Label: 'Significant use of vasopressors or inotropes.' },
+                    { Value: '5', Label: 'Evidence of increased intracranial pressure.' }
                 ]
             }
         ]
@@ -250,7 +250,7 @@ $(document).ready(function () {
 
     var app = new DataEntryForm(recordTemplate, options).Render();
 
-    $(document).keydown(function (e) {
+    $(document).keyup(function (e) {
         var key = 0;
         if (e == null) {
             key = event.keyCode;
@@ -265,34 +265,38 @@ $(document).ready(function () {
             case 27: //Escape
                 var currentField = app.Draft.FieldInFocus();
                 if (currentField != null) {
-                    currentField.ClearSelection();
+                    currentField.Input('');
                 }
                 break;
             case 32: //Space
                 break;
             case 37: //Left
                 var currentField = app.Draft.FieldInFocus();
-                if (currentField != null) {
+                if (currentField == null) break;
+                if (currentField.Interface == 'dropdown') {
                     currentField.SelectPreviousOption();
                 }
                 break;
             case 39: //Right
                 var currentField = app.Draft.FieldInFocus();
-                if (currentField != null) {
+                if (currentField == null) break;
+                if (currentField.Interface == 'dropdown') {
                     currentField.SelectNextOption();
                 }
                 break;
             case 38: //Up
                 var currentField = app.Draft.FieldInFocus();
-                if (currentField != null) {
-                    currentField.SelectPreviousOption();
+                if (currentField == null) break;
+                if (currentField.Interface == 'dropdown') {
+                    if (currentField.SelectedIndex() != -1) currentField.SelectPreviousOption();
                     currentField.SelectPreviousOption();
                 }
                 break;
             case 40: //Down
                 var currentField = app.Draft.FieldInFocus();
-                if (currentField != null) {
-                    currentField.SelectNextOption();
+                if (currentField == null) break;
+                if (currentField.Interface == 'dropdown') {
+                    if (currentField.SelectedIndex() != -1) currentField.SelectNextOption();
                     currentField.SelectNextOption();
                 }
                 break;
@@ -449,7 +453,6 @@ function RecordTemplate(recordTemplateAsJSON) {
             var thisOption = thisField.Options[j];
 
             var optionVM = new OptionVM(thisOption.Value, thisOption.Label);
-            optionVM.DisplayOrder = thisOption.DisplayOrder;
             if (thisOption.AccessKeys) optionVM.AccessKeys = thisOption.AccessKeys;
 
             fieldVM.Options.push(optionVM);
@@ -510,7 +513,6 @@ function RecordVM(recordTemplate, record) {
             var thisOption = thisField.Options[j];
 
             var optionVM = new OptionVM(thisOption.Value, thisOption.Label);
-            optionVM.DisplayOrder = thisOption.DisplayOrder;
             if (thisOption.AccessKeys) optionVM.AccessKeys = thisOption.AccessKeys;
 
             fieldVM.Options.push(optionVM);
@@ -589,6 +591,10 @@ function FieldVM(label) {
 
                 return self.Input();
             }
+
+            if (self.Interface == 'datepicker') {
+                return self.Input();
+            }
             return '';
 
 
@@ -611,18 +617,21 @@ function FieldVM(label) {
     });
 
 
-    function GetSelectedIndex() {
-        for (var i = 0; i < self.Options.length; i++) {
-            if (self.Options[i].Selected() == true) {
-                return i;
+    self.SelectedIndex = ko.computed({
+        read: function () {
+            for (var i = 0; i < self.Options.length; i++) {
+                if (self.Options[i].Selected() == true) {
+                    return i;
+                }
             }
-        }
-        return -1;
-    }
+            return -1;
+        },
+        deferEvaluation: true
+    });
 
     //For Keyboard Support
     self.SelectNextOption = function () {
-        var currentSelection = GetSelectedIndex();
+        var currentSelection = self.SelectedIndex();
         if (currentSelection == -1) {
             this.Input(this.Options[0].Value);
         } else {
@@ -632,7 +641,7 @@ function FieldVM(label) {
 
 
     self.SelectPreviousOption = function () {
-        var currentSelection = GetSelectedIndex();
+        var currentSelection = self.SelectedIndex();
         if (currentSelection == -1) {
             //this.Input(this.Options[this.Options.length - 1].Value);
             this.Input(this.Options[0].Value);
@@ -641,20 +650,6 @@ function FieldVM(label) {
         }
     }
 
-    self.SelectOptionAbove = function () {
-        var currentSelection = GetSelectedIndex();
-        if (currentSelection == -1) {
-            //this.Input(this.Options[this.Options.length - 1].Value);
-            this.Input(this.Options[0].Value);
-        } else {
-            this.Input(this.Options[(currentSelection < 1) ? this.Options.length - 1 : currentSelection - 1].Value);
-        }
-    }
-    
-    self.ClearSelection = function () {
-        this.Input('');
-    }
-    
 }
 
 
@@ -665,7 +660,6 @@ function OptionVM(value, label) {
     self.Value = value;
     self.Label = label;
 
-    self.DisplayOrder = 0;
     self.AccessKeys = [];
     self.Selected = ko.observable(false);
 

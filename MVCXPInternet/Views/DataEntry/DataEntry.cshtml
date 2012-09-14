@@ -2,6 +2,23 @@
     ViewBag.Title = "Index";
 }
 <style type="text/css">
+    #dataEntryApp
+    {
+        color: #333333;
+        font-family: "Segoe UI",Verdana,Helvetica,Sans-Serif;
+        /*font-size: 0.85em;*/
+        margin: 0;
+        padding: 0;
+    }
+    
+    #dataEntryApp table
+    {
+        margin: 0em;
+        border: 0 none;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+    
     #recordListingContainer
     {
         background-color: #FFF;
@@ -26,24 +43,26 @@
         background-color: #DDD;
         padding: 5px 2px;
         font-size: 1.0em;
-        font-weight: normal;
+        font-weight: normal; /*padding: 0.25em; background-color: #FFF;*/
+        text-align: center;
     }
     
-    #recordListing tr.record
+    #recordListing tr.record td
     {
         background-color: #FFF;
         padding: 3px;
-    }
-    
-    #recordListing tr.draft
-    {
-        background-color: #EEE;
-        padding: 3px;
+        text-align: center;
     }
     
     #dataFieldInfoContainer
     {
-        border: solid 1px #CCC;
+        /*
+        border: solid 1px #AAA;
+        border-top-width: 0px;
+        border-bottom-width: 0px;
+        */
+        border:solid 5px #5873a7;
+        border-top-width: 0px;
         margin: 0px;
         padding: 15px;
         background-color: #EEE;
@@ -97,6 +116,7 @@
         font-size: 1.1em;
         font-weight: bold;
         padding: 2px;
+        display:none;
     }
     
     #dataFieldInfoContainer #currentFieldPreview .fieldLabel
@@ -113,63 +133,71 @@
         color: #333;
     }
     
-    
-    
     #editorContainer table tr td
     {
         padding: 0em;
         margin: 0em;
-        border:solid 1px #AAA;
+        border: solid 1px #AAA;
         text-align: center;
     }
-    #editorContainer .labels td
+    
+    #editorContainer tr.labels td
     {
         padding: 0.25em;
     }
     
-    #editorContainer .controls td
+    #editorContainer tr.labels td.currentField
+    {
+        background-color: #eee;
+        border-top-width: 0px; /*background-color: #cfdefc;*/ /*border-color: #5873a7;*/
+    }
+    
+    #editorContainer tr.controls td
     {
         /*border-top-width:0px;*/
+        background-color: #fff;
+        text-align: left;
+        border-bottom:solid 5px #5873a7;
     }
     
-    #editorContainer .labels .currentField
-    {
-        background-color: #cfdefc;
-        border: solid 1px #5873a7;
-        
-    }
     
-    #editorContainer .controls .currentField 
+    
+    #editorContainer tr.controls td.currentField
     {
-        border: solid 1px #5873a7;
-        background-color: White;
+        background-color: #fff; /*border: solid 0px #5873a7;*/
         font-weight: bold;
+        border:solid 5px #5873a7;
+        border-bottom-width:0px;
     }
     
     #editorContainer input
     {
+        width: 35px;
+        color: #476296;
+        font-size: 1.2em;
         margin: 0px;
-        padding: 5px 2px;
-        width: 100%;
+        padding: 5px;
+        background-color: transparent;
+        border-style: none;
     }
     
     #editorContainer input.datepicker
     {
-        /*width: 100px !important;*/
+        width: 90px !important;
     }
     
     #editorContainer input[type=button]
     {
         padding: 5px 0px;
-        width:25px !important;
+        width: 25px !important;
         border: solid 1px #AAA;
-        background-color:#DDD;
+        background-color: #DDD;
     }
     
     #editorContainer input[type=button]:focus
     {
         border: solid 1px #224992;
-        background-color:#cfdefc;
+        background-color: #cfdefc;
     }
     
     
@@ -193,98 +221,97 @@
         padding: 5px;
         background-color: #EEE;
     }
-    
-  
-    
-    
 </style>
 <h2>
     Data Entry - Dynamic form</h2>
-<div id="errors">
-</div>
-<div style="text-align: right">
-    <h4>
-        Processed : <span data-bind="text: ProcessedRecords().length"></span>&nbsp;/&nbsp;<span
-            data-bind="text: Records().length"></span>&nbsp;Pending : <span data-bind="text: PendingRecords().length">
-            </span>&nbsp;/&nbsp;<span data-bind="text: Records().length"></span></h4>
-</div>
-<div id="recordListingContainer">
-    <table id="recordListing" cellpadding="2" cellspacing="0" border="1" width="100%">
-        <thead>
-            <tr>
+<div id="dataEntryApp">
+    <div id="errors">
+    </div>
+    <div style="text-align: right">
+        <h4>
+            Processed : <span data-bind="text: ProcessedRecords().length"></span>&nbsp;/&nbsp;<span
+                data-bind="text: Records().length"></span>&nbsp;Pending : <span data-bind="text: PendingRecords().length">
+                </span>&nbsp;/&nbsp;<span data-bind="text: Records().length"></span></h4>
+    </div>
+    <div id="recordListingContainer">
+        <table id="recordListing" cellpadding="2" cellspacing="0" border="1" width="100%">
+            <thead>
+                <tr>
+                    <!-- ko foreach: Draft.Fields -->
+                    <th data-bind="text: Label">
+                    </th>
+                    <!-- /ko -->
+                    <th>
+                        Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: Records">
+                <tr class="record">
+                    <!-- ko foreach: Fields -->
+                    <td>
+                        <span data-bind="text: Value"></span>
+                        <br />
+                    </td>
+                    <!-- /ko -->
+                    <td>
+                        <span data-bind="text: Status"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div id="editorContainer">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tr class="labels">
                 <!-- ko foreach: Draft.Fields -->
-                <th data-bind="text: Label" style="text-align: center">
-                </th>
-                <!-- /ko -->
-                <th style="padding: 0.25em;">
-                    Status
-                </th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: Records">
-            <tr class="record">
-                <!-- ko foreach: Fields -->
-                <td style="padding: 0.25em;">
-                    <span data-bind="text: Value"></span>
-                    <br />
+                <td data-bind="text: Label, css:{currentField: HasFocus}">
                 </td>
                 <!-- /ko -->
-                <td style="padding: 0.25em; background-color: #FFF;">
-                    <span data-bind="text: Status"></span>
+                <td>
+                    &nbsp;
                 </td>
             </tr>
-        </tbody>
-    </table>
-</div>
-<div id="dataFieldInfoContainer">
-    <div class="optionscontainer">
-        <!-- ko foreach: Draft.Fields -->
-        <div id="currentFieldPreview" data-bind="visible: HasFocus">
-            <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue"
-                data-bind="text: Value"></span>
-        </div>
-        <div class="fieldOptions" data-bind="visible: HasFocus">
-            <!-- ko foreach: Options -->
-            <div class="option" data-bind="css: { selected: Selected }">
-                <table width="100%" border="0" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td class="optionKey">
-                            <span data-bind="text: Value"></span>
-                        </td>
-                        <td class="optionLabel">
-                            <span data-bind="text: Label"></span>
-                        </td>
-                    </tr>
-                </table>
+            <tr class="controls">
+                <!-- ko foreach: Draft.Fields -->
+                <td data-bind="css:{currentField: HasFocus}">
+                    <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}" />
+                </td>
+                <!-- /ko -->
+                <td>
+                    <input id="saveButton " type="button" value="Sv" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="dataFieldInfoContainer">
+        <div class="optionscontainer">
+            <!-- ko foreach: Draft.Fields -->
+            <div id="currentFieldPreview" data-bind="visible: HasFocus">
+                <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue"
+                    data-bind="text: Value"></span>
+            </div>
+            <div class="fieldOptions" data-bind="visible: HasFocus">
+                <!-- ko foreach: Options -->
+                <div class="option" data-bind="css: { selected: Selected }">
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="optionKey">
+                                <span data-bind="text: Value"></span>
+                            </td>
+                            <td class="optionLabel">
+                                <span data-bind="text: Label"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <!-- /ko -->
+                <br style="clear: both;" />
             </div>
             <!-- /ko -->
-            <br style="clear: both;" />
         </div>
-        <!-- /ko -->
     </div>
-</div>
-<div id="editorContainer">
-    <table cellpadding="0" cellspacing="0" border="1" width="100%">
-        <tr class="labels">
-            <!-- ko foreach: Draft.Fields -->
-            <td data-bind="text: Label, css:{currentField: HasFocus}">
-            </td>
-            <!-- /ko -->
-            <td>
-                &nbsp;
-            </td>
-        </tr>
-        <tr class="controls">
-            <!-- ko foreach: Draft.Fields -->
-            <td data-bind="css:{currentField: HasFocus}">
-                <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}" />
-            </td>
-            <!-- /ko -->
-            <td>
-                <input id="saveButton "type="button" value="Sv"  />
-            </td>
-        </tr>
-    </table>
 </div>
 <script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
