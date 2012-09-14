@@ -116,7 +116,7 @@
         font-size: 1.1em;
         font-weight: bold;
         padding: 2px;
-        display:none;
+        /*display:none;*/
     }
     
     #dataFieldInfoContainer #currentFieldPreview .fieldLabel
@@ -261,7 +261,6 @@
             </tbody>
         </table>
     </div>
-    
     <div id="editorContainer">
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
             <tr class="labels">
@@ -289,8 +288,7 @@
         <div class="optionscontainer">
             <!-- ko foreach: Draft.Fields -->
             <div id="currentFieldPreview" data-bind="visible: HasFocus">
-                <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue"
-                    data-bind="text: Value"></span>
+                <span class="fieldLabel" data-bind="text: Label"></span>: <input type="text" class="fieldValue" data-bind="value: Input" />
             </div>
             <div class="fieldOptions" data-bind="visible: HasFocus">
                 <!-- ko foreach: Options -->

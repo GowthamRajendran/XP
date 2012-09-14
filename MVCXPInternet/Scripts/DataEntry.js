@@ -551,6 +551,7 @@ function FieldVM(label) {
 
     //self.Value = ko.observable('');
 
+
     self.Input = ko.observable('');
     self.Value = ko.computed({
         read: function () {
@@ -571,19 +572,23 @@ function FieldVM(label) {
                     if (
                         (thisOption.Value.toLowerCase().indexOf(input.toLowerCase()) == 0)
                             | (thisOption.Label.toLowerCase().indexOf(input.toLowerCase()) == 0)
-                            | (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0)
                             | (thisOption.Value.toLowerCase() == input.toLowerCase())
                             | (thisOption.Label.toLowerCase() == input.toLowerCase())
                         ) {
                         return thisOption.Value;
                     }
 
-
                     for (var k = 0; k < thisOption.AccessKeys.length; k++) {
                         if (thisOption.AccessKeys[k].toLowerCase() == input.toLowerCase()) {
                             return thisOption.Value;
                         }
                     }
+
+                    //Cant use this as an input of N/A will match with Option N
+//                    if (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0) 
+//                    {
+//                        return thisOption.Value;
+//                    }
                 }
             }
 
