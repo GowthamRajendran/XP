@@ -10,7 +10,7 @@
 /// <reference path="jquery.linq.js" />
 
 
-var OutputConsole = $("#messages");
+
 $(document).ready(function () {
 
 
@@ -392,7 +392,6 @@ function DataEntryForm(recordTemplate, options) {
 
     self.SubmitDraft = function () {
 
-
         var newRecord = ko.mapping.fromJS(ko.toJS(self.Draft));
         self.RecordCount(self.RecordCount() + 1);
         newRecord.Id(self.RecordCount());
@@ -411,7 +410,7 @@ function DataEntryForm(recordTemplate, options) {
 
         //RESET DRAFT
         ko.utils.arrayForEach(self.Draft.Fields(), function (field) {
-            field.Value('');
+            field.Input('');
             if (field.DisplayOrder() == 1) field.HasFocus(true);
         });
 
@@ -552,13 +551,14 @@ function FieldVM(label) {
     //self.Value = ko.observable('');
 
 
+    self.IsInputValid = ko.observable(true);
+
+
     self.Input = ko.observable('');
-    self.Value = ko.computed({
+    self.EffectiveValue = ko.computed({
         read: function () {
 
             var input = this.Input();
-
-            OutputConsole.append('<li>' + input + '</li>');
 
             if (input.length == 0) return input;
 
@@ -617,8 +617,8 @@ function FieldVM(label) {
         owner: self
     });
 
-    self.Value.subscribe(function (newValue) {
-
+    self.EffectiveValue.subscribe(function (newValue) {
+       
         if (self.Options.length == 0) return;
 
         $.each(self.Options, function () {
@@ -628,7 +628,10 @@ function FieldVM(label) {
 
     });
 
-
+    self.AutoAdjust = function () {
+        this.Input(this.EffectiveValue()); 
+    }
+    
     self.SelectedIndex = ko.computed({
         read: function () {
             for (var i = 0; i < self.Options.length; i++) {
@@ -650,8 +653,7 @@ function FieldVM(label) {
             this.Input(this.Options[(currentSelection + 2 > this.Options.length) ? 0 : currentSelection + 1].Value);
         }
     }
-
-
+    
     self.SelectPreviousOption = function () {
         var currentSelection = self.SelectedIndex();
         if (currentSelection == -1) {

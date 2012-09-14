@@ -116,7 +116,7 @@
         font-size: 1.1em;
         font-weight: bold;
         padding: 2px;
-        /*display:none;*/
+        display:none;
     }
     
     #dataFieldInfoContainer #currentFieldPreview .fieldLabel
@@ -216,10 +216,11 @@
         position: absolute;
         top: 20px;
         left: 10px;
-        width: 300px;
+        width: 240px;
         border: solid 1px #CCC;
         padding: 5px;
-        background-color: #EEE;
+        background-color: #333;
+        color:lightgreen;
     }
 </style>
 <h2>
@@ -250,7 +251,7 @@
                 <tr class="record">
                     <!-- ko foreach: Fields -->
                     <td>
-                        <span data-bind="text: Value"></span>
+                        <span data-bind="text: EffectiveValue"></span>
                         <br />
                     </td>
                     <!-- /ko -->
@@ -275,7 +276,7 @@
             <tr class="controls">
                 <!-- ko foreach: Draft.Fields -->
                 <td data-bind="css:{currentField: HasFocus}">
-                    <input type="text" data-bind="value: Value, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}" />
+                    <input type="text" data-bind="value: Input, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{currentField: HasFocus}, event: { blur: AutoAdjust}" />
                 </td>
                 <!-- /ko -->
                 <td>
@@ -288,7 +289,7 @@
         <div class="optionscontainer">
             <!-- ko foreach: Draft.Fields -->
             <div id="currentFieldPreview" data-bind="visible: HasFocus">
-                <span class="fieldLabel" data-bind="text: Label"></span>: <input type="text" class="fieldValue" data-bind="value: Input" />
+                <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue" data-bind="text: Input" />
             </div>
             <div class="fieldOptions" data-bind="visible: HasFocus">
                 <!-- ko foreach: Options -->
