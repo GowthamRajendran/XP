@@ -569,16 +569,18 @@ function FieldVM(label) {
                     var thisOption = this.Options[o];
 
                     if (
-                        (thisOption.Value.toLowerCase().indexOf(input.toLowerCase()) == 0) |
-                        (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0) |
-                        (thisOption.Value.toLowerCase() == input.toLowerCase())
+                        (thisOption.Value.toLowerCase().indexOf(input.toLowerCase()) == 0)
+                            | (thisOption.Label.toLowerCase().indexOf(input.toLowerCase()) == 0)
+                            | (input.toLowerCase().indexOf(thisOption.Value.toLowerCase()) == 0)
+                            | (thisOption.Value.toLowerCase() == input.toLowerCase())
+                            | (thisOption.Label.toLowerCase() == input.toLowerCase())
                         ) {
                         return thisOption.Value;
                     }
 
 
-                    for (var k = 0; k < thisOption.Value.AccessKeys.length; k++) {
-                        if (thisOption.Value.AccessKeys[k].toLowerCase() == input.toLowerCase()) {
+                    for (var k = 0; k < thisOption.AccessKeys.length; k++) {
+                        if (thisOption.AccessKeys[k].toLowerCase() == input.toLowerCase()) {
                             return thisOption.Value;
                         }
                     }
