@@ -5,8 +5,7 @@
     #dataEntryApp
     {
         color: #333333;
-        font-family: "Segoe UI",Verdana,Helvetica,Sans-Serif;
-        /*font-size: 0.85em;*/
+        font-family: "Segoe UI" ,Verdana,Helvetica,Sans-Serif; /*font-size: 0.85em;*/
         margin: 0;
         padding: 0;
     }
@@ -61,7 +60,7 @@
         border-top-width: 0px;
         border-bottom-width: 0px;
         */
-        border:solid 5px #5873a7;
+        border: solid 5px #5873a7;
         border-top-width: 0px;
         margin: 0px;
         padding: 15px;
@@ -115,8 +114,7 @@
     {
         font-size: 1.1em;
         font-weight: bold;
-        padding: 2px;
-        /*display:none;*/
+        padding: 2px; /*display:none;*/
     }
     
     #dataFieldInfoContainer #currentFieldPreview .fieldLabel
@@ -157,13 +155,13 @@
         /*border-top-width:0px;*/
         background-color: #fff;
         text-align: left;
-        border-bottom:solid 5px #5873a7;
+        border-bottom: solid 5px #5873a7;
     }
     
     #editorContainer tr.controls td.invalid
     {
-        border-bottom:solid 5px Red;
-        color:Red;
+        border-bottom: solid 5px Red;
+        color: Red;
     }
     
     
@@ -172,8 +170,8 @@
     {
         background-color: #fff; /*border: solid 0px #5873a7;*/
         font-weight: bold;
-        border:solid 5px #5873a7;
-        border-bottom-width:0px;
+        border: solid 5px #5873a7;
+        border-bottom-width: 0px;
     }
     
     #editorContainer input
@@ -187,8 +185,7 @@
         border-style: none;
     }
     
-    span.invalid, 
-    #editorContainer input.invalid
+    span.invalid, #editorContainer input.invalid
     {
         color: Red;
     }
@@ -232,7 +229,7 @@
         border: solid 1px #CCC;
         padding: 5px;
         background-color: #333;
-        color:lightgreen;
+        color: lightgreen;
     }
 </style>
 <h2>
@@ -276,7 +273,7 @@
     </div>
     <div id="editorContainer">
         <table cellpadding="0" cellspacing="0" border="0" width="100%">
-            <tr class="labels">
+            <tr class="labels" style="display: none;">
                 <!-- ko foreach: Draft.Fields -->
                 <td data-bind="text: Label, css:{currentField: HasFocus, invalid: IsInputInvalid}">
                 </td>
@@ -292,20 +289,18 @@
                 </td>
                 <!-- /ko -->
                 <td>
-                    <input id="saveButton " type="button" value="Sv" />
+                  <input id="saveButton" type="button" value="Save" />
                 </td>
             </tr>
         </table>
     </div>
-
     <div id="dataFieldInfoContainer">
         <div class="optionscontainer">
             <!-- ko foreach: Draft.Fields -->
             <div id="currentFieldPreview" data-bind="visible: HasFocus">
-                <span class="fieldLabel" data-bind="text: Label"></span>: 
-                <span class="fieldValue invalid" data-bind="visible: IsInputInvalid, text: WhyInvalid" ></span>
-                <span class="fieldValue" data-bind="visible: !IsInputInvalid(), text: Input" ></span>
-                
+                <span class="fieldLabel" data-bind="text: Label"></span>: <span class="fieldValue invalid"
+                    data-bind="visible: IsInputInvalid, text: WhyInvalid"></span><span class="fieldValue"
+                        data-bind="visible: !IsInputInvalid(), text: Input"></span>
             </div>
             <div class="fieldOptions" data-bind="visible: HasFocus">
                 <!-- ko foreach: Options -->
@@ -328,20 +323,30 @@
         </div>
     </div>
 </div>
-<script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/jquery.signalR-0.5.3.min.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/DataEntry.js")" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
+<div data-bind="text: ko.toJSON(Draft.Fields)"></div>
 
-    });
-</script>
 <div id="outputConsole">
     <ul id="messages">
     </ul>
 </div>
+@section scripts {
+    <script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.23.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.signalR-0.5.3.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/dataentry.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/dataentry2view.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".datepicker").datepicker(
+            {
+                onClose: function () {this.focus();}
+            });
+        });
+    </script>
+}
+

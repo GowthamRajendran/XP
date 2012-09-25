@@ -1,0 +1,347 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+<style type="text/css">
+	*
+	{
+		margin: 0px;
+		padding: 0px;
+		font-size: 1.0em;
+	}
+	#dataEntryApp
+	{
+		color: #333333;
+		font-family: "Segoe UI" ,Verdana,Helvetica,Sans-Serif; /*font-size: 0.85em;*/
+		margin: 0;
+		padding: 0;
+	}
+	
+	#dataEntryApp table
+	{
+		margin: 0em;
+		border: 0 none;
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	
+	.recordListingContainer
+	{
+		background-color: #FFF;
+		border: solid 1px #AAA;
+		height: 500px;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+	
+	.recordListing thead
+	{
+		position: relative;
+		top: 0px;
+	}
+	
+	table.recordListing
+	{
+		/*margin-right:20px;*/
+	}
+	
+	.recordListing th
+	{
+		border: solid 1px #111;
+	}
+	
+	.recordListing td
+	{
+		border: solid 1px #CCC;
+	}
+	
+	.recordListing th
+	{
+		background-color: #DDD;
+		padding: 5px 2px;
+		font-size: 1.0em;
+		font-weight: normal; /*padding: 0.25em; background-color: #FFF;*/
+		text-align: center;
+	}
+	
+	.recordListing th.currentField
+	{
+		background-color: #EEE;
+		font-weight: bold;
+	}
+	
+	.recordListing tr.record td
+	{
+		background-color: #FFF;
+		padding: 3px;
+		text-align: center;
+	}
+	
+	#dataFieldInfoContainer
+	{
+		/*
+		border: solid 1px #AAA;
+		border-top-width: 0px;
+		border-bottom-width: 0px;
+		*/
+		border: solid 5px #5873a7;
+		border-top-width: 0px;
+		margin: 0px;
+		padding: 15px;
+		background-color: #EEE;
+		min-height: 215px;
+	}
+	
+	
+	#dataFieldInfoContainer .optionscontainer
+	{
+	}
+	
+	#dataFieldInfoContainer .optionscontainer .option
+	{
+		border: solid 1px #5873a7;
+		background-color: #cfdefc;
+		padding: 0px;
+		margin: 2px;
+		float: left;
+		width: 450px;
+	}
+	
+	#dataFieldInfoContainer .optionscontainer .option.selected
+	{
+		border: solid 1px #224992;
+		background-color: #4268af;
+		color: #FFF;
+	}
+	
+	#dataFieldInfoContainer .optionscontainer .option table
+	{
+		margin: 0px;
+	}
+	
+	#dataFieldInfoContainer .optionscontainer .option .optionKey
+	{
+		width: 15px;
+		font-weight: bold;
+		font-size: 1.1em;
+		vertical-align: middle;
+		padding: 5px;
+	}
+	#dataFieldInfoContainer .optionscontainer .option .optionLabel
+	{
+		padding: 0px;
+		vertical-align: middle;
+	}
+	
+	
+	#dataFieldInfoContainer #currentFieldPreview
+	{
+		font-size: 1.1em;
+		font-weight: bold;
+		padding: 2px; /*display:none;*/
+	}
+	
+	#dataFieldInfoContainer #currentFieldPreview .fieldLabel
+	{
+	}
+	
+	#dataFieldInfoContainer #currentFieldPreview .fieldValue
+	{
+	}
+	
+	.recordListing tfoot
+	{
+		background-color: #DDD;
+		color: #333;
+	}
+	
+	.recordListing tfoot td
+	{
+		padding: 0em;
+		margin: 0em;
+		border: solid 1px #5873a7;
+		border-top-width: 3px;
+		border-bottom-width: 3px;
+		text-align: center; /*border-top-width:0px;*/
+		background-color: #fff;
+		text-align: left;
+	}
+	
+	.recordListing tfoot td.invalid
+	{
+		border-bottom-color: Red;
+		color: Red;
+		background-color: #FEE;
+	}
+	
+	
+	
+	.recordListing tfoot td.currentField
+	{
+		background-color: #ccF;
+		font-weight: bold;
+	}
+	
+	.recordListing tfoot input
+	{
+		width: 35px;
+		color: #476296;
+		font-size: 1.2em;
+		margin: 0px;
+		padding: 5px;
+		background-color: transparent;
+		border-style: none;
+	}
+	
+	.recordListing tfoot tf select
+	{
+		font-size: 1.0em;
+		width: 40px;
+	}
+	
+	span.invalid, .recordListing tfoot input.invalid
+	{
+		color: Red;
+	}
+	
+	.recordListing tfoot input.datepicker
+	{
+		width: 90px !important;
+	}
+	
+	.recordListing tfoot input[type=button]
+	{
+		padding: 5px 0px;
+		width: 45px !important;
+		border: solid 1px #AAA;
+		background-color: #DDD;
+		font-size: 0.9em;
+	}
+	
+	.recordListing tfoot input[type=button]:focus
+	{
+		border: solid 1px #224992;
+		background-color: #cfdefc;
+	}
+	
+	
+	#errors
+	{
+		color: Maroon;
+		border: solid 1px #FAA;
+		background-color: #FEE;
+		padding: 10px;
+		margin-top: 10px;
+		display: none;
+	}
+	
+	#outputConsole
+	{
+		position: absolute;
+		top: 20px;
+		left: 10px;
+		width: 240px;
+		border: solid 1px #CCC;
+		padding: 5px;
+		background-color: #333;
+		color: Yellow;
+	}
+	
+	.erroricon
+	{
+		position: relative;
+		top: -50px;
+		left: 25px;
+	}
+	
+</style>
+<h2>
+	Data Entry - 2</h2>
+<div id="dataEntryApp">
+	<div id="errors">
+	</div>
+	<div style="text-align: right">
+		<h4>
+			Processed : <span data-bind="text: ProcessedRecords().length"></span>&nbsp;/&nbsp;<span
+				data-bind="text: Records().length"></span>&nbsp;Pending : <span data-bind="text: PendingRecords().length">
+				</span>&nbsp;/&nbsp;<span data-bind="text: Records().length"></span></h4>
+	</div>
+	<div id="recordListingContainer">
+	 <table class="recordListing " cellpadding="2" cellspacing="0" border="1" width="100%">
+			<thead>
+				<tr>
+					<!-- ko foreach: Draft.Fields -->
+					<th data-bind="text: Label, css:{currentField: HasFocus}">
+					</th>
+					<!-- /ko -->
+					<th>
+						Status
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- ko foreach: Records -->
+				<tr class="record">
+					<!-- ko foreach: Fields -->
+					<td>
+						<span data-bind="text: EffectiveValue"></span>
+						<br />
+					</td>
+					<!-- /ko -->
+					<td>
+						<span data-bind="text: Status"></span>
+					</td>
+				</tr>
+				<!-- /ko -->
+			</tbody>
+			<tfoot>
+				<tr>
+					<!-- ko foreach: Draft.Fields -->
+					<td data-bind="css:{currentField: HasFocus, invalid: IsInputInvalid}">
+						<!-- ko if:Interface() == 'dropdown' -->
+						<select data-bind="options: Options, value: Input,   optionsText: 'Value', optionsValue: 'Value', valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{invalid: IsInputInvalid}">
+						</select>
+						<!-- /ko -->
+						<!-- ko if:Interface() == 'textbox' -->
+						<input type="text" data-bind="value: Input, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{invalid: IsInputInvalid}, event: { blur: AutoAdjust}" />
+						<!-- /ko -->
+						<!-- ko if:Interface() == 'datepicker' -->
+						<input type="text" data-bind="value: Input, valueUpdate: 'keyup', hasfocus : HasFocus, attr:{class: Interface},css:{invalid: IsInputInvalid}, event: { blur: AutoAdjust}" />
+						<!-- /ko -->
+						<img class='erroricon' src="/Images/alert.png" title="Invalid Input" data-bind="visible: IsInputInvalid" />
+					</td>
+					<!-- /ko -->
+					<td>
+						<input id="saveButton" type="button" value="Save" />
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+
+</div>
+<div id="outputConsole">
+	<ul id="messages">
+	</ul>
+</div>
+@section scripts {
+	<script src="@Url.Content("~/Scripts/json2.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery-ui-1.8.23.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery.signalR-0.5.3.min.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/signalr/hubs")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/knockout-2.1.0.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/knockout.mapping-latest.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/linq.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/jquery.fixedheadertable.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/dataentry.js")" type="text/javascript"></script>
+	<script src="@Url.Content("~/Scripts/dataentry2view.js")" type="text/javascript"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".datepicker").datepicker(
+			{
+				onClose: function () { this.focus(); }
+			});
+		});
+	</script>
+}

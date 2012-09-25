@@ -173,15 +173,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DataEntryController.cs" />
     <Compile Include="Controllers\DataEntryHub.cs" />
-    <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Scripts\DAL\DataEntryInitializer.cs" />
+    <Compile Include="DAL\DataEntryInitializer.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Scripts\DAL\DataEntryContext.cs" />
+    <Compile Include="DAL\DataEntryContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -241,13 +240,16 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\DataEntryBasic.js" />
-    <Content Include="Scripts\DataEntry.js" />
+    <Content Include="Images\alert.png" />
+    <Content Include="Scripts\dataentry2view.js" />
+    <Content Include="Scripts\dataentryview.js" />
+    <Content Include="Scripts\dataentry.js" />
     <Content Include="Scripts\jquery-1.8.0-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.0.js" />
     <Content Include="Scripts\jquery-1.8.0.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.23.js" />
+    <Content Include="Scripts\jquery-ui-1.8.23.min.js" />
+    <Content Include="Scripts\jquery.fixedheadertable.js" />
     <Content Include="Scripts\jquery.linq-vsdoc.js" />
     <Content Include="Scripts\jquery.linq.js" />
     <Content Include="Scripts\jquery.linq.min.js" />
@@ -320,7 +322,10 @@
     <Content Include="Views\DataEntry\DataEntry.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\DataEntry\DataEntryBasic.cshtml" />
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DataEntry\DataEntry2.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -30,24 +30,19 @@ namespace MVCXPInternet.Controllers
 
         }
 
-        public string ProcessRecord(int recordId)
+        public string ProcessRecord(int recordId, IList<FieldInput> responses)
         {
             //if (!this.Context.User.Identity.IsAuthenticated) Caller.ErrorOccured("Unauthorized operation");
 
             try
             {
                 Caller.RecordProcessing(recordId, 0);
-                System.Threading.Thread.Sleep(1000);
-                Caller.RecordProcessing(recordId, 25);
-                System.Threading.Thread.Sleep(500);
-                Caller.RecordProcessing(recordId, 50);
-                System.Threading.Thread.Sleep(300);
-                Caller.RecordProcessing(recordId, 75);
-                System.Threading.Thread.Sleep(1000);
-                Caller.RecordProcessing(recordId, 100);
+
+
+                
                 Caller.RecordProcessingComplete(recordId);
 
-                //throw new Exception("Test Exception");
+                
 
             }
             catch (Exception e)
@@ -95,5 +90,14 @@ namespace MVCXPInternet.Controllers
         public int Age = 0;
         public string Status = "Draft";
     }
+
+    public class FieldInput
+    {
+        public int DataFieldId = int.MinValue;
+        public string Response = string.Empty;
+    }
+
+
+
 
 }

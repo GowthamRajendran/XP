@@ -6,7 +6,8 @@
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
-        <!-- @Scripts.Render("~/bundles/modernizr") -->
+        @Styles.Render("~/Content/themes/base/css")
+        
     </head>
     <body>
         <header>
@@ -22,6 +23,7 @@
                         <ul id="menu">
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <li>@Html.ActionLink("Data Entry", "DataEntry", "DataEntry")</li>
+                            <li>@Html.ActionLink("Data Entry 2", "DataEntry2", "DataEntry")</li>
                             <li>@Html.ActionLink("Hierarchy Manager", "Manage", "Hierarchy")</li>
                         </ul>
                     </nav>
@@ -41,8 +43,10 @@
                 </div>
             </div>
         </footer>
-
+        
         <!--@Scripts.Render("~/bundles/jquery")-->
+        <!--@Scripts.Render("~/bundles/jqueryui")-->
+        <!--@Scripts.Render("~/bundles/modernizr")-->
         @RenderSection("scripts", required: false)
     </body>
 </html>
