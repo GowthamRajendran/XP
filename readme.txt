@@ -1,2 +1,1 @@
-changes to rebase with
-ECHO is on.
+"initializing readme.txt" 
